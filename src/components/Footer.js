@@ -4,10 +4,15 @@ import dbConnect from "@/lib/db";
 import SiteSettings from "@/models/SiteSettings";
 
 async function getSettings() {
-    await dbConnect();
-    let settings = await SiteSettings.findOne();
-    if (!settings) return {};
-    return settings;
+    try {
+        await dbConnect();
+        let settings = await SiteSettings.findOne();
+        if (!settings) return {};
+        return settings;
+    } catch (error) {
+        console.warn("Failed to fetch settings:", error.message);
+        return {};
+    }
 }
 
 export default async function Footer() {
