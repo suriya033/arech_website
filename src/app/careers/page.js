@@ -37,7 +37,7 @@ export default function Careers() {
                     <div className={styles.intro}>
                         <h2>Work With Us</h2>
                         <p>
-                            At Varsha and Pradeep, we are always looking for talented individuals who share our passion for design and innovation.
+                            At varsha and pradeep architects, we are always looking for talented individuals who share our passion for design and innovation.
                             Whether you are starting your career or looking for the next big challenge, we offer a collaborative environment where you can grow.
                         </p>
                     </div>
@@ -76,7 +76,7 @@ export default function Careers() {
                             </div>
                         </div>
 
-                        {/* Part of Varsha and Pradeep Section */}
+                        {/* Part of varsha and pradeep architects Section */}
                         <div
                             ref={jobRef}
                             className={`${styles.item} ${openSection === 'join' ? styles.active : ''}`}
@@ -85,7 +85,7 @@ export default function Careers() {
                                 className={styles.header}
                                 onClick={() => toggleSection('join')}
                             >
-                                <h3>Part of Varsha and Pradeep</h3>
+                                <h3>Part of varsha and pradeep architects</h3>
                                 <span className={styles.icon}>{openSection === 'join' ? '−' : '+'}</span>
                             </button>
                             <div className={styles.content}>

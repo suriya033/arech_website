@@ -12,7 +12,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Varsha and Pradeep | Modern Architecture & Design",
+  title: "varsha and pradeep architects | Modern Architecture & Design",
   description: "Premium architectural design services for residential and commercial projects.",
 };
 

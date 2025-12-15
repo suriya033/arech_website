@@ -20,7 +20,7 @@ export default function Home() {
             <Link href="/projects" className="btn">
               View Our Work
             </Link>
-            <Link href="/contact" className="btn-outline" style={{ color: '#fff', borderColor: '#fff' }}>
+            <Link href="/contact" className="btn-outline" style={{ color: '#fff', borderColor: '#fff', fontSize: 15 }}>
               Contact Us
             </Link>
           </div>
@@ -30,7 +30,7 @@ export default function Home() {
       {/* Intro Section */}
       <section className="section container">
         <div className={styles.intro}>
-          <h2>Welcome to Varsha and Pradeep</h2>
+          <h2>Welcome to varsha and pradeep architects</h2>
           <p>“Our corporate office in Chennai stands testimony to your ability to convert our abstract ideas on transparency, space, elegance, simplicity, innovation, contemporariness, and green into something graceful, functional, and different.”
           </p>
           <Link href="/about" className="btn-outline">
@@ -68,8 +68,8 @@ export default function Home() {
       <section className="section container">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end', marginBottom: '2rem' }}>
           <div>
-            <h2>Featured Projects</h2>
-            <p style={{ marginBottom: 0 }}>PROJECTS.</p>
+            <h2 style={{ textAlign: 'center' }}>Featured Projects</h2>
+            <p style={{ marginBottom: 0 }}>Our Projects</p>
           </div>
           <Link href="/projects" className={`btn-outline ${styles.viewAllBtn}`}>
             View All

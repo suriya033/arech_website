@@ -3,7 +3,7 @@ import Image from "next/image";
 import TeamListClient from "./TeamListClient";
 
 export const metadata = {
-    title: "About Us | Varsha and Pradeep",
+    title: "About Us | varsha and pradeep architects",
     description: "Learn about our firm, our philosophy, and the team behind our award-winning designs.",
 };
 
@@ -11,22 +11,22 @@ export default function About() {
     return (
         <main>
             <PageHeader
-                title="About Varsha and Pradeep"
+                title="About varsha and pradeep architects"
                 description="We are a team of visionaries dedicated to shaping the future of architecture."
             />
 
             <section className="section container">
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', alignItems: 'center' }}>
                     <div>
-                        <h2>Our Story</h2>
+                        <h2 style={{ textAlign: 'center' }}>Our Story</h2>
                         <p>
-                            Varsha and Pradeep Architects, founded in 1997, began as a small practice operating from a living room and has grown into a leading architectural firm known for innovative, sustainable design. Our office, designed and built by us, was inaugurated in February 2010.</p><p>
-We believe every project is an opportunity to create functional, beautiful, and enduring environments. Our approach is deeply collaborative—clients are partners, not just commissions. Many of our relationships continue well beyond project completion.
+                            varsha and pradeep architects Architects, founded in 1997, began as a small practice operating from a living room and has grown into a leading architectural firm known for innovative, sustainable design. Our office, designed and built by us, was inaugurated in February 2010.</p><p>
+                            We believe every project is an opportunity to create functional, beautiful, and enduring environments. Our approach is deeply collaborative—clients are partners, not just commissions. Many of our relationships continue well beyond project completion.
                         </p>
                         <p>
-                           Begin your journey with us by getting in touch to schedule a meeting or call.</p><p>
+                            Begin your journey with us by getting in touch to schedule a meeting or call.</p><p>
 
-Through our contact page, you can set up a meeting or a call at your earliest convenience.onments that are functional, beautiful, and enduring.
+                            Through our contact page, you can set up a meeting or a call at your earliest convenience.onments that are functional, beautiful, and enduring.
                         </p>
                     </div>
                     <div style={{ position: 'relative', height: '400px' }}>

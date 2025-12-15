@@ -23,7 +23,7 @@ export default async function Footer() {
             <div className="container">
                 <div className={styles.grid}>
                     <div className={styles.brand}>
-                        <h3>Varsha and Pradeep</h3>
+                        <h3>varsha and pradeep architects</h3>
                         <p>Creating timeless spaces that inspire.</p>
                     </div>
 
@@ -49,7 +49,7 @@ export default async function Footer() {
 
                 <div className={styles.bottom}>
                     <p>
-                        &copy; {new Date().getFullYear()} Varsha and Pradeep. All rights reserved.
+                        &copy; {new Date().getFullYear()} varsha and pradeep architects. All rights reserved.
                         <span style={{ margin: '0 0.5rem' }}>|</span>
                         <Link href="/admin/login" className={styles.adminLink}>Admin Login</Link>
                     </p>

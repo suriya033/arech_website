@@ -3,7 +3,7 @@ import dbConnect from "@/lib/db";
 import Service from "@/models/Service";
 
 export const metadata = {
-    title: "Services | Varsha and Pradeep",
+    title: "Services | varsha and pradeep architects",
     description: "Comprehensive architectural and design services tailored to your needs.",
 };
 

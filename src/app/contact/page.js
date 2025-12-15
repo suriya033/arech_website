@@ -5,7 +5,7 @@ import ContactForm from "@/components/ContactForm";
 import MapEmbed from "@/components/MapEmbed";
 
 export const metadata = {
-    title: "Contact Us | Varsha and Pradeep",
+    title: "Contact Us | varsha and pradeep architects",
     description: "Get in touch with us to discuss your next project.",
 };
 

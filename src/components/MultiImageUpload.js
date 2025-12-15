@@ -19,6 +19,16 @@ export default function MultiImageUpload({ values = [], onChange, label = "Image
         onChange(newValues);
     };
 
+    const handleMoveImage = (index, direction) => {
+        const newValues = [...values];
+        if (direction === 'left' && index > 0) {
+            [newValues[index - 1], newValues[index]] = [newValues[index], newValues[index - 1]];
+        } else if (direction === 'right' && index < newValues.length - 1) {
+            [newValues[index + 1], newValues[index]] = [newValues[index], newValues[index + 1]];
+        }
+        onChange(newValues);
+    };
+
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -118,60 +128,121 @@ export default function MultiImageUpload({ values = [], onChange, label = "Image
 
             {values.length > 0 && (
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(100px, 1fr))', gap: '1rem', marginTop: '1rem' }}>
-                    {values.map((img, index) => (
-                        <div key={index} style={{ position: 'relative', height: '100px' }}>
-                            {img.startsWith('data:application/pdf') || img.endsWith('.pdf') ? (
-                                <div style={{
-                                    width: '100%',
-                                    height: '100%',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    border: '1px solid var(--border)',
-                                    borderRadius: '8px',
-                                    background: '#f5f5f5',
-                                    fontSize: '2rem'
-                                }}>
-                                    📄
-                                </div>
-                            ) : (
-                                <img
-                                    src={img}
-                                    alt={`Image ${index + 1}`}
-                                    style={{
+                    {values.map((img, index) => {
+                        if (!img || typeof img !== 'string') return null;
+                        return (
+                            <div key={index} style={{ position: 'relative', height: '100px' }}>
+                                {img.startsWith('data:application/pdf') || img.endsWith('.pdf') ? (
+                                    <div style={{
                                         width: '100%',
                                         height: '100%',
-                                        objectFit: 'cover',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        border: '1px solid var(--border)',
                                         borderRadius: '8px',
-                                        border: '1px solid var(--border)'
+                                        background: '#f5f5f5',
+                                        fontSize: '2rem'
+                                    }}>
+                                        📄
+                                    </div>
+                                ) : (
+                                    <img
+                                        src={img}
+                                        alt={`Image ${index + 1}`}
+                                        style={{
+                                            width: '100%',
+                                            height: '100%',
+                                            objectFit: 'cover',
+                                            borderRadius: '8px',
+                                            border: '1px solid var(--border)'
+                                        }}
+                                    />
+                                )}
+                                <button
+                                    type="button"
+                                    onClick={() => handleRemoveImage(index)}
+                                    style={{
+                                        position: 'absolute',
+                                        top: '-5px',
+                                        right: '-5px',
+                                        backgroundColor: '#ef4444',
+                                        color: 'white',
+                                        border: 'none',
+                                        borderRadius: '50%',
+                                        width: '24px',
+                                        height: '24px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        cursor: 'pointer',
+                                        fontSize: '0.75rem',
+                                        fontWeight: 'bold',
+                                        zIndex: 10
                                     }}
-                                />
-                            )}
-                            <button
-                                type="button"
-                                onClick={() => handleRemoveImage(index)}
-                                style={{
+                                    title="Remove"
+                                >
+                                    ×
+                                </button>
+
+                                {/* Move Controls */}
+                                <div style={{
                                     position: 'absolute',
-                                    top: '-5px',
-                                    right: '-5px',
-                                    backgroundColor: '#ef4444',
-                                    color: 'white',
-                                    border: 'none',
-                                    borderRadius: '50%',
-                                    width: '24px',
-                                    height: '24px',
+                                    bottom: '5px',
+                                    left: '50%',
+                                    transform: 'translateX(-50%)',
                                     display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    cursor: 'pointer',
-                                    fontSize: '0.75rem',
-                                    fontWeight: 'bold'
-                                }}
-                            >
-                                ×
-                            </button>
-                        </div>
-                    ))}
+                                    gap: '8px',
+                                    background: 'rgba(255, 255, 255, 0.9)',
+                                    padding: '4px 8px',
+                                    borderRadius: '20px',
+                                    boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
+                                    zIndex: 5
+                                }}>
+                                    {index > 0 && (
+                                        <button
+                                            type="button"
+                                            onClick={(e) => { e.stopPropagation(); handleMoveImage(index, 'left'); }}
+                                            style={{
+                                                background: 'none',
+                                                border: 'none',
+                                                color: '#333',
+                                                cursor: 'pointer',
+                                                fontSize: '1rem',
+                                                padding: '0',
+                                                lineHeight: 1,
+                                                display: 'flex',
+                                                alignItems: 'center'
+                                            }}
+                                            title="Move Left"
+                                        >
+                                            ◀
+                                        </button>
+                                    )}
+                                    {index < values.length - 1 && (
+                                        <button
+                                            type="button"
+                                            onClick={(e) => { e.stopPropagation(); handleMoveImage(index, 'right'); }}
+                                            style={{
+                                                background: 'none',
+                                                border: 'none',
+                                                color: '#333',
+                                                cursor: 'pointer',
+                                                fontSize: '1rem',
+                                                padding: '0',
+                                                lineHeight: 1,
+                                                display: 'flex',
+                                                alignItems: 'center'
+                                            }}
+                                            title="Move Right"
+                                        >
+                                            ▶
+                                        </button>
+                                    )}
+                                </div>
+                            </div>
+                        );
+                    })}
                 </div>
             )}
         </div>

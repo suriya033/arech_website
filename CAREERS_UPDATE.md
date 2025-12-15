@@ -12,7 +12,7 @@
   - Introduction section
   - **Accordion/Dropdowns**:
     1. **Internship Program**: Details for students/graduates.
-    2. **Part of Varsha and Pradeep**: Job openings for experienced professionals.
+    2. **Part of varsha and pradeep architects**: Job openings for experienced professionals.
 - **Styling**:
   - Clean, professional design.
   - Smooth accordion animations.

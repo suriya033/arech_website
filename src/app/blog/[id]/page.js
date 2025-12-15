@@ -6,10 +6,11 @@ import { notFound } from "next/navigation";
 export async function generateMetadata({ params }) {
     try {
         await dbConnect();
-        const post = await Blog.findById(params.id);
+        const { id } = await params;
+        const post = await Blog.findById(id);
         if (!post) return { title: "Post Not Found" };
         return {
-            title: `${post.title} | Varsha and Pradeep`,
+            title: `${post.title} | varsha and pradeep architects`,
             description: post.excerpt,
         };
     } catch (error) {
@@ -30,7 +31,8 @@ async function getPost(id) {
 }
 
 export default async function BlogPost({ params }) {
-    const post = await getPost(params.id);
+    const { id } = await params;
+    const post = await getPost(id);
 
     if (!post) {
         notFound();

@@ -2,7 +2,7 @@ import PageHeader from "@/components/PageHeader";
 import ProjectsGallery from "@/components/ProjectsGallery";
 
 export const metadata = {
-    title: "Projects | Varsha and Pradeep",
+    title: "Projects | varsha and pradeep architects",
     description: "Explore our portfolio of residential, commercial, and interior design projects.",
 };
 

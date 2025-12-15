@@ -11,7 +11,7 @@ export async function generateMetadata({ params }) {
         const member = await TeamMember.findById(id);
         if (!member) return { title: "Member Not Found" };
         return {
-            title: `${member.name} | Varsha and Pradeep`,
+            title: `${member.name} | varsha and pradeep architects`,
             description: member.role,
         };
     } catch (error) {

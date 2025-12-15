@@ -137,7 +137,7 @@ export default function BlogManagement() {
 
                 <MultiImageUpload
                     label="Blog Images"
-                    values={formData.images || (formData.image ? [formData.image] : [])}
+                    values={formData.images && formData.images.length > 0 ? formData.images : (formData.image ? [formData.image] : [])}
                     onChange={(values) => setFormData({ ...formData, images: values, image: values[0] || "" })}
                 />
 

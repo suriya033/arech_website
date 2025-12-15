@@ -11,7 +11,7 @@ export default function Navbar() {
         <header className={styles.header}>
             <div className={`container ${styles.nav}`}>
                 <Link href="/" className={styles.logo}>
-                    Varsha and Pradeep
+                    varsha and pradeep architects
                 </Link>
 
                 <nav>
