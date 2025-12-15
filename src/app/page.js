@@ -2,23 +2,28 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
 import TestimonialsSection from "@/components/TestimonialsSection";
+import HeroSlider from "@/components/HeroSlider";
 
 export default function Home() {
   return (
     <main>
       {/* Hero Section */}
+      {/* Hero Section */}
       <section className={styles.hero}>
-        <h1>Designing Spaces That Inspire</h1>
-        <p>
-          We create modern, sustainable, and timeless architectural designs tailored to your vision.
-        </p>
-        <div style={{ display: 'flex', gap: '1rem' }}>
-          <Link href="/projects" className="btn">
-            View Our Work
-          </Link>
-          <Link href="/contact" className="btn-outline" style={{ color: '#fff', borderColor: '#fff' }}>
-            Contact Us
-          </Link>
+        <HeroSlider />
+        <div style={{ position: 'relative', zIndex: 2 }}>
+          <h1>Designing Spaces That Inspire</h1>
+          <p>
+            We create modern, sustainable, and timeless architectural designs tailored to your vision.
+          </p>
+          <div style={{ display: 'flex', gap: '1rem' }}>
+            <Link href="/projects" className="btn">
+              View Our Work
+            </Link>
+            <Link href="/contact" className="btn-outline" style={{ color: '#fff', borderColor: '#fff' }}>
+              Contact Us
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -61,7 +66,7 @@ export default function Home() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end', marginBottom: '2rem' }}>
           <div>
             <h2>Featured Projects</h2>
-            <p style={{ marginBottom: 0 }}>A selection of our recent award-winning work.</p>
+            <p style={{ marginBottom: 0 }}>PROJECTS.</p>
           </div>
           <Link href="/projects" className={`btn-outline ${styles.viewAllBtn}`}>
             View All

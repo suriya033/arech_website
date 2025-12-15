@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import ImageUpload from "@/components/ImageUpload";
+import MultiImageUpload from "@/components/MultiImageUpload";
 
 export default function BlogManagement() {
     const { data: session, status } = useSession();
@@ -16,6 +16,7 @@ export default function BlogManagement() {
         excerpt: "",
         content: "",
         image: "",
+        images: [],
         author: "Admin"
     });
 
@@ -56,7 +57,7 @@ export default function BlogManagement() {
 
             if (res.ok) {
                 fetchBlogs();
-                setFormData({ title: "", excerpt: "", content: "", image: "", author: "Admin" });
+                setFormData({ title: "", excerpt: "", content: "", image: "", images: [], author: "Admin" });
                 setEditingId(null);
                 alert(editingId ? "Blog updated!" : "Blog published!");
             }
@@ -73,6 +74,7 @@ export default function BlogManagement() {
             excerpt: blog.excerpt,
             content: blog.content,
             image: blog.image,
+            images: blog.images || [blog.image],
             author: blog.author || "Admin"
         });
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -95,7 +97,7 @@ export default function BlogManagement() {
 
     const handleCancel = () => {
         setEditingId(null);
-        setFormData({ title: "", excerpt: "", content: "", image: "", author: "Admin" });
+        setFormData({ title: "", excerpt: "", content: "", image: "", images: [], author: "Admin" });
     };
 
     if (status === "loading" || loading) {
@@ -133,10 +135,10 @@ export default function BlogManagement() {
                     />
                 </div>
 
-                <ImageUpload
-                    label="Featured Image"
-                    value={formData.image}
-                    onChange={(value) => setFormData({ ...formData, image: value })}
+                <MultiImageUpload
+                    label="Blog Images"
+                    values={formData.images || (formData.image ? [formData.image] : [])}
+                    onChange={(values) => setFormData({ ...formData, images: values, image: values[0] || "" })}
                 />
 
                 <div style={{ marginBottom: '1rem' }}>

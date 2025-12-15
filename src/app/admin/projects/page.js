@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import ImageUpload from "@/components/ImageUpload";
+import MultiImageUpload from "@/components/MultiImageUpload";
 
 export default function ProjectsManagement() {
     const { data: session, status } = useSession();
@@ -16,6 +16,7 @@ export default function ProjectsManagement() {
         category: "Residential",
         location: "",
         image: "",
+        images: [],
         description: ""
     });
 
@@ -56,7 +57,7 @@ export default function ProjectsManagement() {
 
             if (res.ok) {
                 fetchProjects();
-                setFormData({ title: "", category: "Residential", location: "", image: "", description: "" });
+                setFormData({ title: "", category: "Residential", location: "", image: "", images: [], description: "" });
                 setEditingId(null);
                 alert(editingId ? "Project updated!" : "Project added!");
             }
@@ -73,6 +74,7 @@ export default function ProjectsManagement() {
             category: project.category,
             location: project.location,
             image: project.image,
+            images: project.images || [project.image],
             description: project.description || ""
         });
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -95,7 +97,7 @@ export default function ProjectsManagement() {
 
     const handleCancel = () => {
         setEditingId(null);
-        setFormData({ title: "", category: "Residential", location: "", image: "", description: "" });
+        setFormData({ title: "", category: "Residential", location: "", image: "", images: [], description: "" });
     };
 
     if (status === "loading" || loading) {
@@ -146,10 +148,10 @@ export default function ProjectsManagement() {
                     />
                 </div>
 
-                <ImageUpload
-                    label="Project Image"
-                    value={formData.image}
-                    onChange={(value) => setFormData({ ...formData, image: value })}
+                <MultiImageUpload
+                    label="Project Images"
+                    values={formData.images || (formData.image ? [formData.image] : [])}
+                    onChange={(values) => setFormData({ ...formData, images: values, image: values[0] || "" })}
                 />
 
                 <div style={{ marginBottom: '1.5rem' }}>

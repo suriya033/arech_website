@@ -14,9 +14,12 @@ const ProjectSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please provide a location'],
     },
+    images: {
+        type: [String],
+        default: [],
+    },
     image: {
-        type: String,
-        required: [true, 'Please provide an image URL'],
+        type: String, // Keep for backward compatibility or as featured image
     },
     description: {
         type: String,

@@ -1,15 +1,13 @@
 .hero {
+  position: relative;
   height: 90vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  text-align: center;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1487958449943-2429e8be8625?q=80&w=2070&auto=format&fit=crop');
-  background-size: cover;
-  background-position: center;
+  align-items: flex-start;
+  padding: 0 10%;
   color: #fff;
-  padding: 0 var(--spacing-sm);
+  /* Background handled by HeroSlider */
 }
 
 .hero h1 {
