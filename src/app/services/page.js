@@ -8,8 +8,13 @@ export const metadata = {
 };
 
 async function getServices() {
-    await dbConnect();
-    return await Service.find({}).sort({ createdAt: -1 });
+    try {
+        await dbConnect();
+        return await Service.find({}).sort({ createdAt: -1 });
+    } catch (error) {
+        console.warn("Failed to fetch services:", error.message);
+        return [];
+    }
 }
 
 export default async function Services() {

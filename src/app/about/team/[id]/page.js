@@ -5,21 +5,30 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 
 export async function generateMetadata({ params }) {
-    await dbConnect();
-    const { id } = await params;
-    const member = await TeamMember.findById(id);
-    if (!member) return { title: "Member Not Found" };
-    return {
-        title: `${member.name} | Varsha and Pradeep`,
-        description: member.role,
-    };
+    try {
+        await dbConnect();
+        const { id } = await params;
+        const member = await TeamMember.findById(id);
+        if (!member) return { title: "Member Not Found" };
+        return {
+            title: `${member.name} | Varsha and Pradeep`,
+            description: member.role,
+        };
+    } catch (error) {
+        return { title: "Error" };
+    }
 }
 
 async function getMember(id) {
-    await dbConnect();
-    const member = await TeamMember.findById(id);
-    if (!member) return null;
-    return member;
+    try {
+        await dbConnect();
+        const member = await TeamMember.findById(id);
+        if (!member) return null;
+        return member;
+    } catch (error) {
+        console.warn("Failed to fetch member:", error.message);
+        return null;
+    }
 }
 
 export default async function MemberDetails({ params }) {

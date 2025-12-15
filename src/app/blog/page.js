@@ -9,8 +9,13 @@ export const metadata = {
 };
 
 async function getPosts() {
-    await dbConnect();
-    return await Blog.find({}).sort({ createdAt: -1 });
+    try {
+        await dbConnect();
+        return await Blog.find({}).sort({ createdAt: -1 });
+    } catch (error) {
+        console.warn("Failed to fetch posts:", error.message);
+        return [];
+    }
 }
 
 export default async function BlogPage() {

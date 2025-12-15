@@ -4,20 +4,29 @@ import Blog from "@/models/Blog";
 import { notFound } from "next/navigation";
 
 export async function generateMetadata({ params }) {
-    await dbConnect();
-    const post = await Blog.findById(params.id);
-    if (!post) return { title: "Post Not Found" };
-    return {
-        title: `${post.title} | Varsha and Pradeep`,
-        description: post.excerpt,
-    };
+    try {
+        await dbConnect();
+        const post = await Blog.findById(params.id);
+        if (!post) return { title: "Post Not Found" };
+        return {
+            title: `${post.title} | Varsha and Pradeep`,
+            description: post.excerpt,
+        };
+    } catch (error) {
+        return { title: "Error" };
+    }
 }
 
 async function getPost(id) {
-    await dbConnect();
-    const post = await Blog.findById(id);
-    if (!post) return null;
-    return post;
+    try {
+        await dbConnect();
+        const post = await Blog.findById(id);
+        if (!post) return null;
+        return post;
+    } catch (error) {
+        console.warn("Failed to fetch post:", error.message);
+        return null;
+    }
 }
 
 export default async function BlogPost({ params }) {

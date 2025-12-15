@@ -9,10 +9,15 @@ export const metadata = {
 };
 
 async function getSettings() {
-    await dbConnect();
-    let settings = await SiteSettings.findOne();
-    if (!settings) return {};
-    return settings;
+    try {
+        await dbConnect();
+        let settings = await SiteSettings.findOne();
+        if (!settings) return {};
+        return settings;
+    } catch (error) {
+        console.warn("Failed to fetch settings:", error.message);
+        return {};
+    }
 }
 
 export default async function Contact() {
