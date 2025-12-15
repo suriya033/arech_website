@@ -1,36 +1,13 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Admin Setup Instructions
 
-## Getting Started
+1.  **Register Admin**: Go to `http://localhost:3000/register-admin` to create your first admin account.
+2.  **Login**: Go to `http://localhost:3000/admin/login` to log in.
+3.  **Dashboard**: Once logged in, you can manage Team Members and Projects from the dashboard.
+4.  **Cleanup**: After creating the admin, delete the `src/app/register-admin` folder for security.
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Features Added
+- **MongoDB Integration**: Data is now stored in MongoDB.
+- **Authentication**: Secure admin login using NextAuth.js.
+- **Team Management**: Add team members with name, role, image, and description.
+- **Project Management**: Add projects with title, category, location, image, and description.
+- **Dynamic Frontend**: The "About Us" and "Projects" pages now fetch data from the database.
