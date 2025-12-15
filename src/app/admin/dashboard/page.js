@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useEffect } from "react";
 
+import styles from "../admin.module.css";
+
 export default function Dashboard() {
     const { data: session, status } = useSession();
     const router = useRouter();
@@ -20,9 +22,9 @@ export default function Dashboard() {
     }
 
     return (
-        <div style={{ display: 'flex', minHeight: '100vh' }}>
+        <div className={styles.container}>
             {/* Sidebar */}
-            <aside style={{ width: '250px', backgroundColor: '#2d2d2d', color: '#fff', padding: '2rem' }}>
+            <aside className={styles.sidebar}>
                 <h2 style={{ marginBottom: '2rem' }}>Admin Panel</h2>
                 <nav>
                     <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -46,11 +48,11 @@ export default function Dashboard() {
             </aside>
 
             {/* Main Content */}
-            <main style={{ flex: 1, padding: '2rem', backgroundColor: '#f9f9f9' }}>
+            <main className={styles.main}>
                 <h1>Welcome, {session?.user?.email}</h1>
                 <p style={{ marginBottom: '2rem' }}>Manage your website content from the options below.</p>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2rem' }}>
+                <div className={styles.grid}>
                     <Link href="/admin/team" style={{ padding: '2rem', backgroundColor: 'white', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', textAlign: 'center', transition: 'transform 0.3s' }}>
                         <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>👥</div>
                         <h3 style={{ marginBottom: '0.5rem' }}>Team</h3>

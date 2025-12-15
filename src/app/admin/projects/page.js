@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import MultiImageUpload from "@/components/MultiImageUpload";
+import styles from "../admin.module.css";
 
 export default function ProjectsManagement() {
     const { data: session, status } = useSession();
@@ -177,35 +178,40 @@ export default function ProjectsManagement() {
             </form>
 
             <h2 style={{ marginBottom: '1.5rem' }}>Projects ({projects.length})</h2>
-            <div style={{ display: 'grid', gap: '1.5rem' }}>
+            <div className={styles.projectList}>
                 {projects.map((project) => (
                     <div
                         key={project._id}
                         style={{
                             display: 'flex',
-                            gap: '1.5rem',
+                            flexDirection: 'column',
+                            gap: '1rem',
                             padding: '1.5rem',
                             border: '1px solid var(--border)',
                             borderRadius: '8px',
-                            backgroundColor: 'var(--background)'
+                            backgroundColor: 'white',
+                            boxShadow: '0 2px 4px rgba(0,0,0,0.05)'
                         }}
                     >
-                        <img
-                            src={project.image}
-                            alt={project.title}
-                            style={{ width: '150px', height: '100px', objectFit: 'cover', borderRadius: '8px' }}
-                        />
-                        <div style={{ flex: 1 }}>
-                            <h3 style={{ marginBottom: '0.5rem' }}>{project.title}</h3>
-                            <p style={{ color: 'var(--accent)', marginBottom: '0.25rem' }}>{project.category}</p>
-                            <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginBottom: '0.5rem' }}>{project.location}</p>
-                            {project.description && <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>{project.description}</p>}
+                        <div style={{ position: 'relative', height: '200px', width: '100%' }}>
+                            <img
+                                src={project.image}
+                                alt={project.title}
+                                style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px' }}
+                            />
                         </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                        <div style={{ flex: 1 }}>
+                            <h3 style={{ marginBottom: '0.5rem', fontSize: '1.25rem' }}>{project.title}</h3>
+                            <p style={{ color: 'var(--accent)', marginBottom: '0.25rem', fontWeight: '500' }}>{project.category}</p>
+                            <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginBottom: '0.5rem' }}>{project.location}</p>
+                            {project.description && <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{project.description}</p>}
+                        </div>
+                        <div style={{ display: 'flex', gap: '0.5rem', marginTop: 'auto' }}>
                             <button
                                 onClick={() => handleEdit(project)}
                                 style={{
-                                    padding: '0.5rem 1rem',
+                                    flex: 1,
+                                    padding: '0.5rem',
                                     backgroundColor: 'var(--primary)',
                                     color: 'white',
                                     border: 'none',
@@ -218,9 +224,10 @@ export default function ProjectsManagement() {
                             <button
                                 onClick={() => handleDelete(project._id)}
                                 style={{
-                                    padding: '0.5rem 1rem',
-                                    backgroundColor: 'var(--error)',
-                                    color: 'white',
+                                    flex: 1,
+                                    padding: '0.5rem',
+                                    backgroundColor: '#fee2e2',
+                                    color: '#ef4444',
                                     border: 'none',
                                     borderRadius: '4px',
                                     cursor: 'pointer'
