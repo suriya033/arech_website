@@ -1,185 +1,457 @@
-.sliderContainer {
+/* Team Section Container */
+.teamSection {
     width: 100%;
+    padding: 2rem 0;
+}
+
+/* Loading State */
+.loadingContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    gap: 1.5rem;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid var(--border);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Empty State */
+.emptyState {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--text-muted);
+}
+
+.emptyIcon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.emptyState h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--foreground);
+}
+
+/* Team Grid */
+.teamGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+/* Member Card */
+.memberCard {
+    opacity: 0;
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.cardInner {
+    display: flex;
+    gap: 2.5rem;
+    background: linear-gradient(135deg, var(--background) 0%, var(--secondary) 100%);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid var(--border);
     position: relative;
 }
 
-.slider {
-    width: 100%;
-    overflow: hidden;
+.cardInner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
-.sliderTrack {
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
-    transition: transform 0.5s ease-in-out;
+.cardInner:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
 }
 
-.card {
-    text-align: center;
-    background-color: var(--background);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: default;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 2rem;
-    padding: 2rem;
+.cardInner:hover::before {
+    opacity: 1;
 }
 
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+/* Image Section */
+.imageWrapper {
+    flex-shrink: 0;
+    width: 280px;
+    position: relative;
 }
 
 .imageContainer {
-    width: 200px;
-    height: 200px;
-    flex-shrink: 0;
-    overflow: hidden;
+    width: 100%;
+    height: 100%;
     position: relative;
-    border-radius: 12px;
+    overflow: hidden;
 }
 
-.image {
+.memberImage {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.card:hover .image {
-    transform: scale(1.05);
+.cardInner:hover .memberImage {
+    transform: scale(1.1);
 }
 
-.content {
+.imageOverlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 2rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.cardInner:hover .imageOverlay {
+    opacity: 1;
+}
+
+.viewProfileBtn {
+    background: white;
+    color: var(--primary);
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.viewProfileBtn:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Member Info */
+.memberInfo {
     flex: 1;
-    text-align: left;
+    padding: 2rem 2rem 2rem 0;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    justify-content: center;
 }
 
-.name {
-    margin-bottom: 0.5rem;
-    font-size: 1.5rem;
-}
-
-.role {
-    color: var(--accent);
-    font-weight: 500;
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    letter-spacing: 1px;
-}
-
-.description {
-    font-size: 0.95rem;
-    color: var(--text-muted);
-    line-height: 1.6;
+.memberHeader {
     margin-bottom: 1.5rem;
+}
+
+.memberName {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--foreground);
+    line-height: 1.2;
+}
+
+.memberRole {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: white;
+    padding: 0.5rem 1.25rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.memberDescription {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
 
-.button {
-    width: fit-content;
-    justify-content: center;
+.cardActions {
+    margin-top: auto;
+}
+
+.learnMoreBtn {
     display: inline-flex;
-}
-
-.controls {
-    display: flex;
-    justify-content: center;
     align-items: center;
-    gap: 2rem;
-    margin-top: 3rem;
-}
-
-.navButton {
-    background-color: var(--primary);
-    color: white;
-    border: none;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    font-size: 1.5rem;
-    cursor: pointer;
+    gap: 0.5rem;
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 1rem;
     transition: all 0.3s ease;
+}
+
+.learnMoreBtn:hover {
+    gap: 0.75rem;
+    color: var(--accent);
+}
+
+/* Navigation */
+.navigation {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 2rem;
+    margin: 3rem 0;
 }
 
-.navButton:hover {
-    background-color: var(--accent);
+.navBtn {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--background);
+    border: 2px solid var(--border);
+    color: var(--foreground);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.navBtn:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
     transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
-.dots {
+.navBtn:active {
+    transform: scale(0.95);
+}
+
+.pageIndicators {
     display: flex;
     gap: 0.75rem;
     align-items: center;
 }
 
-.dot {
-    width: 12px;
-    height: 12px;
+.pageIndicator {
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
-    background-color: var(--border);
-    border: none;
+    background: var(--background);
+    border: 2px solid var(--border);
+    color: var(--text-muted);
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: all 0.3s ease;
-    padding: 0;
+    font-weight: 600;
+    font-size: 0.95rem;
+    position: relative;
 }
 
-.dot:hover {
-    background-color: var(--accent);
-    transform: scale(1.2);
+.pageIndicator:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: scale(1.05);
 }
 
-.activeDot {
-    background-color: var(--primary);
-    width: 14px;
-    height: 14px;
+.activeIndicator {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    border-color: var(--primary);
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Mobile Styles */
-@media (max-width: 768px) {
-    .card {
+.indicatorNumber {
+    position: relative;
+    z-index: 1;
+}
+
+/* Team Stats */
+.teamStats {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    padding: 2rem;
+    background: var(--secondary);
+    border-radius: 16px;
+    margin-top: 2rem;
+}
+
+.statItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.statNumber {
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.statLabel {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.statDivider {
+    width: 2px;
+    height: 40px;
+    background: var(--border);
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+    .cardInner {
         flex-direction: column;
-        text-align: center;
+        gap: 0;
+    }
+
+    .imageWrapper {
+        width: 100%;
+        height: 350px;
+    }
+
+    .memberInfo {
+        padding: 2rem;
+    }
+
+    .memberName {
+        font-size: 1.75rem;
+    }
+
+    .navigation {
+        gap: 1rem;
+    }
+
+    .navBtn {
+        width: 48px;
+        height: 48px;
+    }
+
+    .pageIndicator {
+        width: 40px;
+        height: 40px;
+    }
+
+    .teamStats {
+        gap: 2rem;
         padding: 1.5rem;
     }
 
-    .imageContainer {
-        width: 100%;
-        height: 280px;
+    .statNumber {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .teamGrid {
+        gap: 1.5rem;
     }
 
-    .content {
-        text-align: center;
-        align-items: center;
+    .cardInner {
+        border-radius: 16px;
     }
 
-    .button {
-        width: 100%;
+    .imageWrapper {
+        height: 300px;
     }
 
-    .navButton {
-        width: 40px;
-        height: 40px;
-        font-size: 1.2rem;
+    .memberInfo {
+        padding: 1.5rem;
     }
 
-    .controls {
-        gap: 1rem;
-        margin-top: 2rem;
+    .memberName {
+        font-size: 1.5rem;
+    }
+
+    .memberRole {
+        font-size: 0.75rem;
+        padding: 0.4rem 1rem;
+    }
+
+    .memberDescription {
+        font-size: 0.95rem;
+        -webkit-line-clamp: 2;
+    }
+
+    .navigation {
+        gap: 0.75rem;
+    }
+
+    .navBtn {
+        width: 44px;
+        height: 44px;
+    }
+
+    .pageIndicators {
+        gap: 0.5rem;
+    }
+
+    .pageIndicator {
+        width: 36px;
+        height: 36px;
+        font-size: 0.85rem;
+    }
+
+    .teamStats {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .statDivider {
+        width: 60px;
+        height: 2px;
     }
 }

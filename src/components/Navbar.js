@@ -25,7 +25,7 @@ export default function Navbar() {
                 </nav>
 
                 <Link href="/contact" className={`btn ${styles.cta}`}>
-                    Get a Quote
+                   Contact US
                 </Link>
 
                 <button
