@@ -3,6 +3,7 @@ import Link from "next/link";
 import styles from "./page.module.css";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import HeroSlider from "@/components/HeroSlider";
+import StatsSection from "@/components/StatsSection";
 
 export default function Home() {
   return (
@@ -119,6 +120,9 @@ export default function Home() {
           </Link>
         </div>
       </section>
+
+      {/* Stats Section */}
+      <StatsSection />
 
       {/* Testimonials Section */}
       <div id="testimonials">

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import PageHeader from "@/components/PageHeader";
+import PageHeroSlider from "@/components/PageHeroSlider";
 import CareerApplicationForm from "@/components/CareerApplicationForm";
 import styles from "./careers.module.css";
 
@@ -27,9 +27,14 @@ export default function Careers() {
 
     return (
         <main>
-            <PageHeader
+            <PageHeroSlider
                 title="Careers"
                 description="Join our team and help us create timeless spaces."
+                images={[
+                    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop",
+                    "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2031&auto=format&fit=crop",
+                    "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop"
+                ]}
             />
 
             <section className={styles.section}>

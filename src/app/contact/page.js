@@ -1,4 +1,4 @@
-import PageHeader from "@/components/PageHeader";
+import PageHeroSlider from "@/components/PageHeroSlider";
 import dbConnect from "@/lib/db";
 import SiteSettings from "@/models/SiteSettings";
 import ContactForm from "@/components/ContactForm";
@@ -26,9 +26,14 @@ export default async function Contact() {
 
     return (
         <main>
-            <PageHeader
+            <PageHeroSlider
                 title="Contact Us"
                 description="We'd love to hear from you. Let's build something amazing together."
+                images={[
+                    "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop",
+                    "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2053&auto=format&fit=crop",
+                    "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop"
+                ]}
             />
 
             <section className="section container">

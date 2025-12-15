@@ -1,4 +1,4 @@
-import PageHeader from "@/components/PageHeader";
+import PageHeroSlider from "@/components/PageHeroSlider";
 import Image from "next/image";
 import TeamListClient from "./TeamListClient";
 
@@ -10,9 +10,14 @@ export const metadata = {
 export default function About() {
     return (
         <main>
-            <PageHeader
+            <PageHeroSlider
                 title="About varsha and pradeep architects"
                 description="We are a team of visionaries dedicated to shaping the future of architecture."
+                images={[
+                    "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop",
+                    "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2031&auto=format&fit=crop",
+                    "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2053&auto=format&fit=crop"
+                ]}
             />
 
             <section className="section container">

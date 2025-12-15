@@ -1,4 +1,4 @@
-import PageHeader from "@/components/PageHeader";
+import PageHeroSlider from "@/components/PageHeroSlider";
 import dbConnect from "@/lib/db";
 import Service from "@/models/Service";
 
@@ -22,9 +22,14 @@ export default async function Services() {
 
     return (
         <main>
-            <PageHeader
+            <PageHeroSlider
                 title="Our Services"
                 description="We offer a full range of architectural and design services to bring your vision to life."
+                images={[
+                    "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2031&auto=format&fit=crop",
+                    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop",
+                    "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop"
+                ]}
             />
 
             <section className="section container">

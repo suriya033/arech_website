@@ -109,109 +109,27 @@ export default function ProjectsGallery() {
 
             {/* Project Modal */}
             {selectedProject && (
-                <div
-                    style={{
-                        position: 'fixed',
-                        top: 0,
-                        left: 0,
-                        width: '100%',
-                        height: '100%',
-                        backgroundColor: 'rgba(0,0,0,0.9)',
-                        zIndex: 1000,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        padding: '2rem'
-                    }}
-                    onClick={closeProject}
-                >
-                    <div
-                        style={{
-                            position: 'relative',
-                            width: '100%',
-                            maxWidth: '1000px',
-                            maxHeight: '90vh',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center'
-                        }}
-                        onClick={(e) => e.stopPropagation()}
-                    >
+                <div className={styles.modalOverlay} onClick={closeProject}>
+                    <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
                         {/* Close Button */}
-                        <button
-                            onClick={closeProject}
-                            style={{
-                                position: 'absolute',
-                                top: '-40px',
-                                right: '0',
-                                background: 'none',
-                                border: 'none',
-                                color: 'white',
-                                fontSize: '2rem',
-                                cursor: 'pointer'
-                            }}
-                        >
+                        <button onClick={closeProject} className={styles.closeBtn}>
                             ×
                         </button>
 
                         {/* Image Slider */}
-                        <div style={{ position: 'relative', width: '100%', height: '60vh', marginBottom: '1rem' }}>
+                        <div className={styles.sliderContainer}>
                             <img
                                 src={getProjectImages(selectedProject)[currentImageIndex]}
                                 alt={selectedProject.title}
-                                style={{
-                                    width: '100%',
-                                    height: '100%',
-                                    objectFit: 'contain'
-                                }}
+                                className={styles.sliderImage}
                             />
 
                             {getProjectImages(selectedProject).length > 1 && (
                                 <>
-                                    <button
-                                        onClick={prevImage}
-                                        style={{
-                                            position: 'absolute',
-                                            left: '10px',
-                                            top: '50%',
-                                            transform: 'translateY(-50%)',
-                                            background: 'rgba(255,255,255,0.2)',
-                                            color: 'white',
-                                            border: 'none',
-                                            borderRadius: '50%',
-                                            width: '40px',
-                                            height: '40px',
-                                            cursor: 'pointer',
-                                            fontSize: '1.5rem',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center',
-                                            backdropFilter: 'blur(4px)'
-                                        }}
-                                    >
+                                    <button onClick={prevImage} className={`${styles.navBtn} ${styles.prevBtn}`}>
                                         ‹
                                     </button>
-                                    <button
-                                        onClick={nextImage}
-                                        style={{
-                                            position: 'absolute',
-                                            right: '10px',
-                                            top: '50%',
-                                            transform: 'translateY(-50%)',
-                                            background: 'rgba(255,255,255,0.2)',
-                                            color: 'white',
-                                            border: 'none',
-                                            borderRadius: '50%',
-                                            width: '40px',
-                                            height: '40px',
-                                            cursor: 'pointer',
-                                            fontSize: '1.5rem',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center',
-                                            backdropFilter: 'blur(4px)'
-                                        }}
-                                    >
+                                    <button onClick={nextImage} className={`${styles.navBtn} ${styles.nextBtn}`}>
                                         ›
                                     </button>
                                 </>
@@ -219,10 +137,10 @@ export default function ProjectsGallery() {
                         </div>
 
                         {/* Project Details */}
-                        <div style={{ color: 'white', textAlign: 'center', maxWidth: '800px' }}>
-                            <h2 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>{selectedProject.title}</h2>
-                            <p style={{ color: '#ccc', marginBottom: '1rem' }}>{selectedProject.location} • {selectedProject.category}</p>
-                            <p style={{ lineHeight: '1.6' }}>{selectedProject.description}</p>
+                        <div className={styles.projectDetails}>
+                            <h2 className={styles.projectTitle}>{selectedProject.title}</h2>
+                            <p className={styles.projectMeta}>{selectedProject.location} • {selectedProject.category}</p>
+                            <p className={styles.projectDesc}>{selectedProject.description}</p>
                         </div>
                     </div>
                 </div>

@@ -43,6 +43,7 @@ export default async function Footer() {
                         <ul>
                             <li>{settings.phone || "+91 98400 20792"}</li>
                             <li>{settings.email || "pradeep_vparchitects@yahoo.co.in"}</li>
+                            <li style={{ whiteSpace: 'pre-line', marginTop: '0.5rem' }}>{settings.address || "1/427, KCG College Road, Karapakkam, Chennai - 600097"}</li>
                         </ul>
                     </div>
                 </div>
