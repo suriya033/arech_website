@@ -66,7 +66,15 @@ export default async function Contact() {
             </section>
 
             {/* Map Section */}
-            <section style={{ height: '450px', width: '100%', backgroundColor: '#f5f5f5' }}>
+            <section style={{
+                height: '500px',
+                width: '100%',
+                maxWidth: '1400px',
+                margin: '0 auto',
+                borderRadius: '24px',
+                overflow: 'hidden',
+                boxShadow: '0 20px 60px rgba(0,0,0,0.15)'
+            }}>
                 <MapEmbed googleMapUrl={settings.googleMapUrl} />
             </section>
         </main>
