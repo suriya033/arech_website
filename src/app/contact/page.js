@@ -2,6 +2,7 @@ import PageHeader from "@/components/PageHeader";
 import dbConnect from "@/lib/db";
 import SiteSettings from "@/models/SiteSettings";
 import ContactForm from "@/components/ContactForm";
+import MapEmbed from "@/components/MapEmbed";
 
 export const metadata = {
     title: "Contact Us | Varsha and Pradeep",
@@ -65,22 +66,8 @@ export default async function Contact() {
             </section>
 
             {/* Map Section */}
-            <section style={{ height: '450px', width: '100%', backgroundColor: '#eee' }}>
-                {settings.googleMapUrl ? (
-                    <iframe
-                        src={settings.googleMapUrl}
-                        width="100%"
-                        height="100%"
-                        style={{ border: 0 }}
-                        allowFullScreen=""
-                        loading="lazy"
-                        referrerPolicy="no-referrer-when-downgrade"
-                    ></iframe>
-                ) : (
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: '#888', fontSize: '1.5rem' }}>
-                        Map location not set in admin settings.
-                    </div>
-                )}
+            <section style={{ height: '450px', width: '100%', backgroundColor: '#f5f5f5' }}>
+                <MapEmbed googleMapUrl={settings.googleMapUrl} />
             </section>
         </main>
     );
