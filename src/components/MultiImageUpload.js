@@ -103,7 +103,7 @@ export default function MultiImageUpload({ values = [], onChange, label = "Image
                 <div style={{ marginBottom: '1rem' }}>
                     <input
                         type="file"
-                        accept="image/*"
+                        accept="image/*,application/pdf"
                         onChange={handleFileChange}
                         style={{
                             width: '100%',
@@ -120,17 +120,33 @@ export default function MultiImageUpload({ values = [], onChange, label = "Image
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(100px, 1fr))', gap: '1rem', marginTop: '1rem' }}>
                     {values.map((img, index) => (
                         <div key={index} style={{ position: 'relative', height: '100px' }}>
-                            <img
-                                src={img}
-                                alt={`Image ${index + 1}`}
-                                style={{
+                            {img.startsWith('data:application/pdf') || img.endsWith('.pdf') ? (
+                                <div style={{
                                     width: '100%',
                                     height: '100%',
-                                    objectFit: 'cover',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    border: '1px solid var(--border)',
                                     borderRadius: '8px',
-                                    border: '1px solid var(--border)'
-                                }}
-                            />
+                                    background: '#f5f5f5',
+                                    fontSize: '2rem'
+                                }}>
+                                    📄
+                                </div>
+                            ) : (
+                                <img
+                                    src={img}
+                                    alt={`Image ${index + 1}`}
+                                    style={{
+                                        width: '100%',
+                                        height: '100%',
+                                        objectFit: 'cover',
+                                        borderRadius: '8px',
+                                        border: '1px solid var(--border)'
+                                    }}
+                                />
+                            )}
                             <button
                                 type="button"
                                 onClick={() => handleRemoveImage(index)}

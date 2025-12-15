@@ -1,0 +1,145 @@
+.section {
+    padding: 4rem 0;
+    min-height: 60vh;
+}
+
+.intro {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 4rem;
+}
+
+.intro h2 {
+    font-family: 'FF Mark', sans-serif;
+    margin-bottom: 1.5rem;
+    color: var(--primary);
+}
+
+.intro p {
+    font-family: 'Calibri', sans-serif;
+    font-size: 1.1rem;
+    color: var(--text-muted);
+}
+
+.accordion {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.item {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    background: white;
+    scroll-margin-top: 100px;
+    /* Fix for scrolling behind header */
+}
+
+.item:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    border-color: var(--accent);
+}
+
+.item.active {
+    border-color: var(--primary);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    transition: background-color 0.3s ease;
+}
+
+.header:hover {
+    background-color: #f9f9f9;
+}
+
+.header h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-family: 'FF Mark', sans-serif;
+    color: var(--primary);
+}
+
+.icon {
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--accent);
+    line-height: 1;
+}
+
+.content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.item.active .content {
+    max-height: 3000px;
+    /* Large enough for the form */
+}
+
+.innerContent {
+    padding: 0 2rem 2rem;
+    border-top: 1px solid var(--border);
+    padding-top: 1.5rem;
+}
+
+.innerContent p {
+    font-family: 'Calibri', sans-serif;
+    margin-bottom: 1.5rem;
+}
+
+.innerContent h4 {
+    font-family: 'FF Mark', sans-serif;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: var(--primary);
+}
+
+.innerContent ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.innerContent li {
+    font-family: 'Calibri', sans-serif;
+    margin-bottom: 0.5rem;
+    color: var(--text-muted);
+}
+
+.innerContent a {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.innerContent a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .header {
+        padding: 1.25rem;
+    }
+
+    .header h3 {
+        font-size: 1.2rem;
+    }
+
+    .innerContent {
+        padding: 0 1.25rem 1.5rem;
+    }
+}

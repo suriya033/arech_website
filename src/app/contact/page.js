@@ -35,28 +35,31 @@ export default async function Contact() {
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem' }}>
 
                     {/* Contact Info */}
-                    <div>
-                        <h2>Get in Touch</h2>
-                        <p style={{ marginBottom: '2rem' }}>
+                    <div style={{ textAlign: 'center' }}>
+                        <h2 style={{ marginBottom: '1rem', fontSize: '2.5rem', fontFamily: 'var(--font-heading)' }}>Get in Touch</h2>
+                        <p style={{ marginBottom: '3rem', color: 'var(--text-muted)', fontSize: '1.1rem' }}>
                             Have a project in mind? Fill out the form or contact us directly.
                         </p>
 
-                        <div style={{ marginBottom: '2rem' }}>
-                            <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>Office</h3>
-                            <p style={{ whiteSpace: 'pre-line' }}>{settings.address || "123 Architecture Ave\nDesign City, ST 12345"}</p>
+                        <div style={{ marginBottom: '2.5rem' }}>
+                            <h3 style={{ fontSize: '1.25rem', marginBottom: '0.75rem', fontWeight: 'bold' }}>Office</h3>
+                            <p style={{ whiteSpace: 'pre-line', lineHeight: '1.6' }}>{settings.address || "123 Architecture Ave\nDesign City, ST 12345"}</p>
                         </div>
 
-                        <div style={{ marginBottom: '2rem' }}>
-                            <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>Contact</h3>
-                            <p>
-                                Phone: {settings.phone || "+91 98400 20792"}<br />
-                                Email: {settings.email || "pradeep_vparchitects@yahoo.co.in"}
+                        <div style={{ marginBottom: '2.5rem' }}>
+                            <h3 style={{ fontSize: '1.25rem', marginBottom: '0.75rem', fontWeight: 'bold' }}>Contact</h3>
+                            <p style={{ lineHeight: '1.8' }}>
+                                <span style={{ display: 'block' }}>Phone: {settings.phone || "+91 98400 20792"}</span>
+                                <span style={{ display: 'block' }}>Email: {settings.email || "pradeep_vparchitects@yahoo.co.in"}</span>
                             </p>
                         </div>
 
                         <div style={{ marginBottom: '2rem' }}>
-                            <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>Hours</h3>
-                            <p>Mon - Fri: 9:00 AM - 6:00 PM<br />Sat - Sun: Closed</p>
+                            <h3 style={{ fontSize: '1.25rem', marginBottom: '0.75rem', fontWeight: 'bold' }}>Hours</h3>
+                            <p style={{ lineHeight: '1.6' }}>
+                                Mon - Fri: 9:00 AM - 6:00 PM<br />
+                                Sat - Sun: Closed
+                            </p>
                         </div>
                     </div>
 

@@ -108,7 +108,14 @@ export default function MapEmbed({ googleMapUrl }) {
     }
 
     return (
-        <div style={{ width: '100%', height: '100%', position: 'relative' }}>
+        <div style={{
+            width: '100%',
+            height: '100%',
+            position: 'relative',
+            animation: 'revealMap 1.2s cubic-bezier(0.77, 0, 0.175, 1) forwards',
+            opacity: 0,
+            transform: 'translateY(20px)'
+        }}>
             {/* Loading Overlay */}
             {isLoading && (
                 <div style={{
@@ -147,7 +154,9 @@ export default function MapEmbed({ googleMapUrl }) {
                 height="100%"
                 style={{
                     border: 0,
-                    display: 'block'
+                    display: 'block',
+                    filter: isLoading ? 'blur(10px)' : 'none',
+                    transition: 'filter 0.5s ease'
                 }}
                 allowFullScreen=""
                 loading="lazy"
@@ -164,35 +173,38 @@ export default function MapEmbed({ googleMapUrl }) {
             {!isLoading && (
                 <div style={{
                     position: 'absolute',
-                    bottom: '24px',
+                    bottom: '30px',
                     left: '50%',
                     transform: 'translateX(-50%)',
-                    background: 'white',
-                    padding: '1rem 2rem',
+                    background: 'rgba(255, 255, 255, 0.95)',
+                    backdropFilter: 'blur(10px)',
+                    padding: '1rem 2.5rem',
                     borderRadius: '50px',
-                    boxShadow: '0 8px 30px rgba(0,0,0,0.2)',
-                    fontSize: '0.95rem',
+                    boxShadow: '0 10px 40px rgba(0,0,0,0.15)',
+                    fontSize: '1rem',
                     fontWeight: '700',
-                    color: '#2d3748',
+                    color: '#1a202c',
                     display: 'flex',
                     alignItems: 'center',
                     gap: '0.75rem',
                     pointerEvents: 'none',
                     zIndex: 5,
-                    animation: 'slideUp 0.5s ease-out'
+                    animation: 'floatBadge 4s ease-in-out infinite'
                 }}>
-                    <span style={{ fontSize: '1.5rem' }}>📍</span>
-                    <span>Find Us Here</span>
+                    <span style={{ fontSize: '1.5rem', animation: 'bounce 2s infinite' }}>📍</span>
+                    <span style={{ letterSpacing: '0.5px' }}>Find Us Here</span>
                     <style jsx>{`
-                        @keyframes slideUp {
-                            from {
-                                opacity: 0;
-                                transform: translateX(-50%) translateY(20px);
-                            }
-                            to {
-                                opacity: 1;
-                                transform: translateX(-50%) translateY(0);
-                            }
+                        @keyframes revealMap {
+                            0% { opacity: 0; transform: translateY(40px) scale(0.95); }
+                            100% { opacity: 1; transform: translateY(0) scale(1); }
+                        }
+                        @keyframes floatBadge {
+                            0%, 100% { transform: translateX(-50%) translateY(0); box-shadow: 0 10px 40px rgba(0,0,0,0.15); }
+                            50% { transform: translateX(-50%) translateY(-8px); box-shadow: 0 20px 50px rgba(0,0,0,0.2); }
+                        }
+                        @keyframes bounce {
+                            0%, 100% { transform: translateY(0); }
+                            50% { transform: translateY(-3px); }
                         }
                     `}</style>
                 </div>

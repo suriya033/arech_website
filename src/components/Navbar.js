@@ -20,12 +20,13 @@ export default function Navbar() {
                         <li><Link href="/about" className={styles.link} onClick={() => setIsOpen(false)}>About</Link></li>
                         <li><Link href="/projects" className={styles.link} onClick={() => setIsOpen(false)}>Projects</Link></li>
                         <li><Link href="/services" className={styles.link} onClick={() => setIsOpen(false)}>Services</Link></li>
+                        <li><Link href="/careers" className={styles.link} onClick={() => setIsOpen(false)}>Careers</Link></li>
                         <li><Link href="/blog" className={styles.link} onClick={() => setIsOpen(false)}>Blog</Link></li>
                     </ul>
                 </nav>
 
                 <Link href="/contact" className={`btn ${styles.cta}`}>
-                   Contact US
+                    Contact US
                 </Link>
 
                 <button

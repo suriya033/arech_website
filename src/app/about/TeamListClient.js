@@ -70,11 +70,9 @@ export default function TeamListClient() {
                             <div className={styles.memberInfo}>
                                 <h3 className={styles.memberName}>{member.name}</h3>
                                 <p className={styles.memberRole}>{member.role}</p>
-                                {member.description && (
-                                    <p className={styles.memberDescription}>
-                                        {member.description}
-                                    </p>
-                                )}
+                                <button className={styles.viewMoreBtn}>
+                                    View More
+                                </button>
                             </div>
                         </Link>
                     </div>

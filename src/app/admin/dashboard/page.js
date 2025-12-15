@@ -32,6 +32,7 @@ export default function Dashboard() {
                         <li><Link href="/admin/services" style={{ color: '#ccc', textDecoration: 'none' }}>Manage Services</Link></li>
                         <li><Link href="/admin/blog" style={{ color: '#ccc', textDecoration: 'none' }}>Manage Blog</Link></li>
                         <li><Link href="/admin/testimonials" style={{ color: '#ccc', textDecoration: 'none' }}>Manage Testimonials</Link></li>
+                        <li><Link href="/admin/careers" style={{ color: '#ccc', textDecoration: 'none' }}>Manage Careers</Link></li>
                         <li><Link href="/admin/messages" style={{ color: '#ccc', textDecoration: 'none' }}>Messages</Link></li>
                         <li><Link href="/admin/settings" style={{ color: '#ccc', textDecoration: 'none' }}>Site Settings</Link></li>
                     </ul>
@@ -66,6 +67,12 @@ export default function Dashboard() {
                         <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>⚙️</div>
                         <h3 style={{ marginBottom: '0.5rem' }}>Services</h3>
                         <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Manage services</p>
+                    </Link>
+
+                    <Link href="/admin/careers" style={{ padding: '2rem', backgroundColor: 'white', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', textAlign: 'center', transition: 'transform 0.3s' }}>
+                        <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>💼</div>
+                        <h3 style={{ marginBottom: '0.5rem' }}>Careers</h3>
+                        <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Manage applications</p>
                     </Link>
 
                     <Link href="/admin/blog" style={{ padding: '2rem', backgroundColor: 'white', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', textAlign: 'center', transition: 'transform 0.3s' }}>

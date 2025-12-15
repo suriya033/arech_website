@@ -47,14 +47,17 @@ export default function Home() {
         </div>
         <div className={styles.servicesGrid}>
           <div className={styles.serviceCard}>
+            <div className={styles.serviceIcon}>🏛️</div>
             <h3>Architectural Design</h3>
             <p>From concept to construction, we deliver innovative design solutions that balance aesthetics with functionality.</p>
           </div>
           <div className={styles.serviceCard}>
+            <div className={styles.serviceIcon}>🛋️</div>
             <h3>Interior Design</h3>
             <p>Creating cohesive and beautiful interiors that complement the architectural form and enhance user experience.</p>
           </div>
           <div className={styles.serviceCard}>
+            <div className={styles.serviceIcon}>🏙️</div>
             <h3>Urban Planning</h3>
             <p>Sustainable master planning for communities and large-scale developments that prioritize connectivity and livability.</p>
           </div>

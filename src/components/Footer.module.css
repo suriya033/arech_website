@@ -1,42 +1,61 @@
 .footer {
     background-color: var(--primary);
     color: var(--background);
-    padding: var(--spacing-lg) 0;
+    padding: 2rem 0;
+    /* Reduced padding */
+    font-size: 0.9rem;
+    /* Smaller font size overall */
 }
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: var(--spacing-lg);
-    margin-bottom: var(--spacing-lg);
+    grid-template-columns: 1.5fr 1fr 1fr;
+    /* Adjusted columns */
+    gap: 2rem;
+    margin-bottom: 2rem;
+    align-items: start;
 }
 
 .brand h3 {
     color: var(--background);
-    margin-bottom: var(--spacing-sm);
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+    /* Smaller heading */
+    font-family: 'FF Mark', sans-serif;
+    /* Ensure heading font */
 }
 
 .brand p {
     color: #a0a0a0;
+    font-size: 0.9rem;
+    max-width: 300px;
+    font-family: 'Calibri', sans-serif;
+    /* Ensure description font */
 }
 
 .column h4 {
     color: var(--background);
-    font-size: 1.1rem;
-    margin-bottom: var(--spacing-md);
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: 'FF Mark', sans-serif;
 }
 
 .column ul {
     list-style: none;
+    padding: 0;
 }
 
 .column li {
-    margin-bottom: var(--spacing-xs);
+    margin-bottom: 0.5rem;
+    font-family: 'Calibri', sans-serif;
 }
 
 .column a {
     color: #a0a0a0;
     transition: color var(--transition-fast);
+    text-decoration: none;
 }
 
 .column a:hover {
@@ -45,8 +64,65 @@
 
 .bottom {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: var(--spacing-md);
-    text-align: center;
+    padding-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.bottom p {
     color: #777;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    margin: 0;
+    font-family: 'Calibri', sans-serif;
+}
+
+.adminLink {
+    color: #555;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.adminLink:hover {
+    color: var(--accent);
+    text-decoration: underline;
+}
+
+.socialIcons {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.socialIcons a {
+    color: #a0a0a0;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.socialIcons a:hover {
+    color: var(--background);
+    transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+    }
+
+    .brand p {
+        margin: 0 auto;
+    }
+
+    .bottom {
+        flex-direction: column;
+        text-align: center;
+    }
 }
