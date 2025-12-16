@@ -13,6 +13,7 @@ export default function HeroSlider() {
     const [currentImage, setCurrentImage] = useState(0);
 
     useEffect(() => {
+        
         const interval = setInterval(() => {
             setCurrentImage((prev) => (prev + 1) % heroImages.length);
         }, 5000); // Changed to 5000ms (5s) for better UX, 0.5s is too fast.

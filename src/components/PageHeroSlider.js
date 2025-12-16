@@ -36,5 +36,6 @@ export default function PageHeroSlider({ title, description, images = defaultIma
                 </div>
             </div>
         </div>
+        
     );
 }

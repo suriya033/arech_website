@@ -5,16 +5,18 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import HeroSlider from "@/components/HeroSlider";
 import StatsSection from "@/components/StatsSection";
 
+import ScrollReveal from "@/components/ScrollReveal";
+
 export default function Home() {
   return (
     <main>
-      {/* Hero Section */}
+      <ScrollReveal />
       {/* Hero Section */}
       <section className={styles.hero}>
         <HeroSlider />
         <div style={{ position: 'relative', zIndex: 2 }}>
-          <h1>Designing Spaces That Inspire</h1>
-          <p>
+          <h1 className="reveal">Designing Spaces That Inspire</h1>
+          <p className="reveal">
             We create modern, sustainable, and timeless architectural designs tailored to your vision.
           </p>
           <div style={{ display: 'flex', gap: '1rem' }}>
@@ -26,12 +28,14 @@ export default function Home() {
             </Link>
           </div>
         </div>
+
+
       </section>
 
       {/* Intro Section */}
       <section className="section container">
         <div className={styles.intro}>
-          <h2>Welcome to varsha and pradeep architects</h2>
+          <h2 className="intro-h2">Welcome to varsha and pradeep architects</h2>
           <p>“Our corporate office in Chennai stands testimony to your ability to convert our abstract ideas on transparency, space, elegance, simplicity, innovation, contemporariness, and green into something graceful, functional, and different.”
           </p>
           <Link href="/about" className="btn-outline">
@@ -140,5 +144,6 @@ export default function Home() {
         </div>
       </section>
     </main>
+
   );
 }

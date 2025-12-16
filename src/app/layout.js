@@ -28,7 +28,7 @@ import Footer from "@/components/Footer";
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" data-jetski-tab-id="1235884761">
+    <html lang="en" data-jetski-tab-id="1235884875">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Navbar />
         {children}
