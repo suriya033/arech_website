@@ -84,7 +84,7 @@ export default function MultiImageUpload({ values = [], onChange, label = "Image
                     <input
                         type="url"
                         placeholder="Enter image URL"
-                        value={currentInput}
+                        value={currentInput || ""}
                         onChange={(e) => setCurrentInput(e.target.value)}
                         style={{
                             flex: 1,

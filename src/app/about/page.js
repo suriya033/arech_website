@@ -31,7 +31,7 @@ export default function About() {
                         <p>
                             Begin your journey with us by getting in touch to schedule a meeting or call.</p><p>
 
-                            Through our contact page, you can set up a meeting or a call at your earliest convenience.onments that are functional, beautiful, and enduring.
+                            Through our contact page, you can set up a meeting or a call at your earliest convenience. Environments that are functional, beautiful, and enduring.
                         </p>
                     </div>
                     <div style={{ position: 'relative', height: '400px' }}>

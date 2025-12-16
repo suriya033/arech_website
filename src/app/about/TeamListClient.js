@@ -49,11 +49,10 @@ export default function TeamListClient() {
     return (
         <div className={styles.teamSection}>
             <div className={styles.teamGrid}>
-                {members.map((member, index) => (
+                {members.map((member) => (
                     <div
                         key={member._id}
                         className={styles.memberCard}
-                        style={{ animationDelay: `${index * 0.1}s` }}
                     >
                         <Link href={`/about/team/${member._id}`} className={styles.cardLink}>
                             <div className={styles.imageContainer}>
@@ -70,9 +69,7 @@ export default function TeamListClient() {
                             <div className={styles.memberInfo}>
                                 <h3 className={styles.memberName}>{member.name}</h3>
                                 <p className={styles.memberRole}>{member.role}</p>
-                                <button className={styles.viewMoreBtn}>
-                                    View More
-                                </button>
+                               
                             </div>
                         </Link>
                     </div>

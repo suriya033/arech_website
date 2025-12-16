@@ -46,7 +46,7 @@ export default function StatsSection() {
                     <div style={{ fontSize: '3rem', fontWeight: 'bold', color: 'var(--primary)', marginBottom: '0.5rem' }}>
                         {stats.publications}+
                     </div>
-                    <div style={{ fontSize: '1.1rem', color: 'var(--text-muted)' }}>Publications & Awards</div>
+                    <div style={{ fontSize: '1.1rem', color: 'var(--text-muted)' }}>Publications</div>
                 </div>
             </div>
         </section>
