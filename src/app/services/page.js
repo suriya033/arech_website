@@ -9,10 +9,6 @@ export const metadata = {
     description: "Comprehensive architectural and design services tailored to your needs.",
 };
 
-export const viewport = {
-    width: "device-width",
-    initialScale: 1,
-};
 
 async function getServices() {
     try {

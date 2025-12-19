@@ -9,10 +9,6 @@ export const metadata = {
     description: "Insights, trends, and news from the world of architecture and design.",
 };
 
-export const viewport = {
-    width: "device-width",
-    initialScale: 1,
-};
 
 async function getPosts() {
     try {

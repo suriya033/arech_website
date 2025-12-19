@@ -9,10 +9,7 @@ export const metadata = {
     description: "Learn about our firm, our philosophy, and the team behind our award-winning designs.",
 };
 
-export const viewport = {
-    width: "device-width",
-    initialScale: 1,
-};
+
 
 export default function About() {
     return (

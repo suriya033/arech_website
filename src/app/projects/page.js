@@ -6,10 +6,6 @@ export const metadata = {
     description: "Explore our portfolio of residential, commercial, and interior design projects.",
 };
 
-export const viewport = {
-    width: "device-width",
-    initialScale: 1,
-};
 
 export default function Projects() {
     return (

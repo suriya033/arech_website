@@ -11,10 +11,7 @@ export const metadata = {
     description: "Get in touch with us to discuss your next project.",
 };
 
-export const viewport = {
-    width: "device-width",
-    initialScale: 1,
-};
+
 
 async function getSettings() {
     try {

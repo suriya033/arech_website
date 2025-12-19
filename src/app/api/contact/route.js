@@ -34,3 +34,16 @@ export async function DELETE(request) {
         return NextResponse.json({ error: error.message }, { status: 500 });
     }
 }
+
+export async function PUT(request) {
+    try {
+        await dbConnect();
+        const { searchParams } = new URL(request.url);
+        const id = searchParams.get('id');
+        const data = await request.json();
+        const message = await ContactMessage.findByIdAndUpdate(id, data, { new: true });
+        return NextResponse.json(message);
+    } catch (error) {
+        return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+}
