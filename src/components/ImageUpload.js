@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 export default function ImageUpload({ value, onChange, label = "Image" }) {
     const [uploadMethod, setUploadMethod] = useState("url"); // 'url' or 'file'
@@ -99,16 +100,17 @@ export default function ImageUpload({ value, onChange, label = "Image" }) {
             {preview && (
                 <div style={{ marginTop: '1rem' }}>
                     <p style={{ fontSize: '0.9rem', marginBottom: '0.5rem', color: 'var(--text-muted)' }}>Preview:</p>
-                    <img
+                    <Image
                         src={preview}
                         alt="Preview"
+                        width={200}
+                        height={200}
                         style={{
-                            maxWidth: '200px',
-                            maxHeight: '200px',
                             objectFit: 'cover',
                             borderRadius: '8px',
                             border: '1px solid var(--border)'
                         }}
+                        unoptimized
                     />
                 </div>
             )}

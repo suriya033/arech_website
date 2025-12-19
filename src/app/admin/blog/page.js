@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import MultiImageUpload from "@/components/MultiImageUpload";
 
 export default function BlogManagement() {
@@ -190,10 +191,12 @@ export default function BlogManagement() {
                             backgroundColor: 'var(--background)'
                         }}
                     >
-                        <img
+                        <Image
                             src={blog.image}
                             alt={blog.title}
-                            style={{ width: '200px', height: '130px', objectFit: 'cover', borderRadius: '8px' }}
+                            width={200}
+                            height={130}
+                            style={{ objectFit: 'cover', borderRadius: '8px' }}
                         />
                         <div style={{ flex: 1 }}>
                             <h3 style={{ marginBottom: '0.5rem' }}>{blog.title}</h3>

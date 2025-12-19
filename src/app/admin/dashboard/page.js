@@ -1,16 +1,15 @@
 "use client";
 
-import { useSession, signOut } from "next-auth/react";
-import { useRouter, usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useEffect } from "react";
-
+import AdminSidebar from "@/components/AdminSidebar";
 import styles from "../admin.module.css";
 
 export default function Dashboard() {
     const { data: session, status } = useSession();
     const router = useRouter();
-    const pathname = usePathname();
 
     useEffect(() => {
         if (status === "unauthenticated") {
@@ -20,62 +19,54 @@ export default function Dashboard() {
 
     if (status === "loading") {
         return (
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+            <div className={styles.loadingContainer}>
+                <div className={styles.loader}></div>
                 <p>Loading Dashboard...</p>
             </div>
         );
     }
 
+    if (!session) return null;
+
     const navItems = [
-        { name: "Dashboard", path: "/admin/dashboard", icon: "📊" },
-        { name: "Manage Team", path: "/admin/team", icon: "👥" },
-        { name: "Manage Projects", path: "/admin/projects", icon: "🏗️" },
-        { name: "Manage Services", path: "/admin/services", icon: "⚙️" },
-        { name: "Manage Testimonials", path: "/admin/testimonials", icon: "💬" },
-        { name: "Manage Careers", path: "/admin/careers", icon: "💼" },
-        { name: "Messages", path: "/admin/messages", icon: "📬" },
-        { name: "Site Settings", path: "/admin/settings", icon: "🛠️" },
+        { name: "Projects", path: "/admin/projects", icon: "🏗️", desc: "Manage your architectural portfolio" },
+        { name: "Services", path: "/admin/services", icon: "⚙️", desc: "Update your service offerings" },
+        { name: "Team", path: "/admin/team", icon: "👥", desc: "Manage your creative team" },
+        { name: "Testimonials", path: "/admin/testimonials", icon: "💬", desc: "Manage client feedback" },
+        { name: "Careers", path: "/admin/careers", icon: "💼", desc: "Post new job openings" },
+        { name: "Messages", path: "/admin/messages", icon: "📬", desc: "View client inquiries" },
+        { name: "Settings", path: "/admin/settings", icon: "🛠️", desc: "Update site-wide settings" },
     ];
 
     return (
         <div className={styles.container}>
-            {/* Sidebar */}
-            <aside className={styles.sidebar}>
-                <h2>Admin Panel</h2>
-                <nav>
-                    <ul>
-                        {navItems.map((item) => (
-                            <li key={item.path}>
-                                <Link
-                                    href={item.path}
-                                    className={pathname === item.path ? styles.active : ""}
-                                >
-                                    <span style={{ marginRight: '10px' }}>{item.icon}</span>
-                                    {item.name}
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
-                </nav>
-                <button
-                    onClick={() => signOut({ callbackUrl: "/admin/login" })}
-                    className={styles.logoutBtn}
-                >
-                    Logout
-                </button>
-            </aside>
+            <AdminSidebar />
 
-            {/* Main Content */}
             <main className={styles.main}>
-                <h1>Welcome, {session?.user?.email?.split('@')[0]}</h1>
-                <p>Manage your website content and monitor activity from your dashboard.</p>
+                <div className={styles.header}>
+                    <div>
+                        <h1>Welcome back, {session?.user?.email?.split('@')[0]}</h1>
+                        <p>Here's an overview of your website management tools.</p>
+                    </div>
+                </div>
 
-                <div className={styles.grid}>
-                    {navItems.slice(1).map((item) => (
+                <div className={styles.statsBar}>
+                    <div className={styles.statItem}>
+                        <span className={styles.statLabel}>Active Session</span>
+                        <span className={styles.statValue}>Admin</span>
+                    </div>
+                    <div className={styles.statItem}>
+                        <span className={styles.statLabel}>Last Login</span>
+                        <span className={styles.statValue}>{new Date().toLocaleDateString()}</span>
+                    </div>
+                </div>
+
+                <div className={styles.projectGrid}>
+                    {navItems.map((item) => (
                         <Link href={item.path} key={item.path} className={styles.card}>
                             <div className={styles.cardIcon}>{item.icon}</div>
-                            <h3>{item.name.replace('Manage ', '')}</h3>
-                            <p>Click to manage {item.name.toLowerCase().replace('manage ', '')}</p>
+                            <h3>{item.name}</h3>
+                            <p>{item.desc}</p>
                         </Link>
                     ))}
                 </div>
@@ -83,4 +74,3 @@ export default function Dashboard() {
         </div>
     );
 }
-

@@ -3,7 +3,10 @@
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import ImageUpload from "@/components/ImageUpload";
+import AdminSidebar from "@/components/AdminSidebar";
+import styles from "../admin.module.css";
 
 export default function TeamManagement() {
     const { data: session, status } = useSession();
@@ -11,6 +14,7 @@ export default function TeamManagement() {
     const [members, setMembers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [editingId, setEditingId] = useState(null);
+    const [showForm, setShowForm] = useState(false);
     const [formData, setFormData] = useState({
         name: "",
         role: "",
@@ -60,7 +64,8 @@ export default function TeamManagement() {
                 fetchMembers();
                 setFormData({ name: "", role: "", image: "", description: "", order: 0, email: "", phone: "" });
                 setEditingId(null);
-                alert(editingId ? "Member updated!" : "Member added!");
+                setShowForm(false);
+                alert(editingId ? "Member updated successfully!" : "Member added successfully!");
             }
         } catch (error) {
             console.error("Error:", error);
@@ -79,6 +84,7 @@ export default function TeamManagement() {
             email: member.email || "",
             phone: member.phone || ""
         });
+        setShowForm(true);
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
@@ -89,169 +95,189 @@ export default function TeamManagement() {
             const res = await fetch(`/api/team?id=${id}`, { method: "DELETE" });
             if (res.ok) {
                 fetchMembers();
-                alert("Member deleted!");
+                alert("Member deleted successfully.");
             }
         } catch (error) {
             console.error("Error:", error);
-            alert("Failed to delete");
+            alert("Failed to delete member.");
         }
     };
 
     const handleCancel = () => {
         setEditingId(null);
+        setShowForm(false);
         setFormData({ name: "", role: "", image: "", description: "", order: 0, email: "", phone: "" });
     };
 
     if (status === "loading" || loading) {
-        return <div style={{ padding: '2rem' }}>Loading...</div>;
+        return (
+            <div className={styles.loadingContainer}>
+                <div className={styles.loader}></div>
+                <p>Loading Team...</p>
+            </div>
+        );
     }
 
     if (!session) return null;
 
     return (
-        <div style={{ padding: '2rem' }}>
-            <h1 style={{ marginBottom: '2rem' }}>{editingId ? "Edit" : "Add"} Team Member</h1>
+        <div className={styles.container}>
+            <AdminSidebar />
 
-            <form onSubmit={handleSubmit} style={{ marginBottom: '3rem', maxWidth: '600px' }}>
-                <div style={{ marginBottom: '1rem' }}>
-                    <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>Name</label>
-                    <input
-                        type="text"
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        required
-                        style={{ width: '100%', padding: '0.75rem', border: '1px solid var(--border)', borderRadius: '4px' }}
-                    />
-                </div>
-
-                <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '1rem' }}>
-                    <div style={{ marginBottom: '1rem' }}>
-                        <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>Role</label>
-                        <input
-                            type="text"
-                            value={formData.role}
-                            onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                            required
-                            style={{ width: '100%', padding: '0.75rem', border: '1px solid var(--border)', borderRadius: '4px' }}
-                        />
-                    </div>
-                    <div style={{ marginBottom: '1rem' }}>
-                        <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>Order (Sort)</label>
-                        <input
-                            type="number"
-                            value={formData.order}
-                            onChange={(e) => setFormData({ ...formData, order: parseInt(e.target.value) || 0 })}
-                            style={{ width: '100%', padding: '0.75rem', border: '1px solid var(--border)', borderRadius: '4px' }}
-                        />
-                    </div>
-                </div>
-
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
+            <main className={styles.main}>
+                <div className={styles.header}>
                     <div>
-                        <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>Email (Optional)</label>
-                        <input
-                            type="email"
-                            value={formData.email}
-                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                            style={{ width: '100%', padding: '0.75rem', border: '1px solid var(--border)', borderRadius: '4px' }}
-                        />
+                        <h1>Team Management</h1>
+                        <p>Manage the creative minds behind your architectural firm.</p>
                     </div>
-                    <div>
-                        <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>Phone (Optional)</label>
-                        <input
-                            type="text"
-                            value={formData.phone}
-                            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                            style={{ width: '100%', padding: '0.75rem', border: '1px solid var(--border)', borderRadius: '4px' }}
-                        />
-                    </div>
-                </div>
-
-                <ImageUpload
-                    label="Profile Image"
-                    value={formData.image}
-                    onChange={(value) => setFormData({ ...formData, image: value })}
-                />
-
-                <div style={{ marginBottom: '1.5rem' }}>
-                    <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>Description (Optional)</label>
-                    <textarea
-                        value={formData.description}
-                        onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                        rows={4}
-                        style={{ width: '100%', padding: '0.75rem', border: '1px solid var(--border)', borderRadius: '4px', fontFamily: 'inherit' }}
-                    />
-                </div>
-
-                <div style={{ display: 'flex', gap: '1rem' }}>
-                    <button type="submit" className="btn">
-                        {editingId ? "Update Member" : "Add Member"}
-                    </button>
-                    {editingId && (
-                        <button type="button" onClick={handleCancel} className="btn-outline">
-                            Cancel
+                    {!showForm && (
+                        <button
+                            onClick={() => setShowForm(true)}
+                            className={styles.addBtn}
+                        >
+                            <span>+</span> Add Team Member
                         </button>
                     )}
                 </div>
-            </form>
 
-            <h2 style={{ marginBottom: '1.5rem' }}>Team Members ({members.length})</h2>
-            <div style={{ display: 'grid', gap: '1.5rem' }}>
-                {members.map((member) => (
-                    <div
-                        key={member._id}
-                        style={{
-                            display: 'flex',
-                            gap: '1.5rem',
-                            padding: '1.5rem',
-                            border: '1px solid var(--border)',
-                            borderRadius: '8px',
-                            backgroundColor: 'var(--background)'
-                        }}
-                    >
-                        <img
-                            src={member.image}
-                            alt={member.name}
-                            style={{ width: '100px', height: '100px', objectFit: 'cover', borderRadius: '8px' }}
-                        />
-                        <div style={{ flex: 1 }}>
-                            <h3 style={{ marginBottom: '0.5rem' }}>{member.name}</h3>
-                            <p style={{ color: 'var(--accent)', marginBottom: '0.5rem' }}>{member.role}</p>
-                            <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Order: {member.order}</p>
-                            {member.email && <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>📧 {member.email}</p>}
-                            {member.phone && <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>📞 {member.phone}</p>}
+                {showForm && (
+                    <div className={styles.formCard}>
+                        <div className={styles.formHeader}>
+                            <h2>{editingId ? "Edit Team Member" : "Add New Member"}</h2>
+                            <button onClick={handleCancel} className={styles.closeBtn}>&times;</button>
                         </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                            <button
-                                onClick={() => handleEdit(member)}
-                                style={{
-                                    padding: '0.5rem 1rem',
-                                    backgroundColor: 'var(--primary)',
-                                    color: 'white',
-                                    border: 'none',
-                                    borderRadius: '4px',
-                                    cursor: 'pointer'
-                                }}
-                            >
-                                Edit
-                            </button>
-                            <button
-                                onClick={() => handleDelete(member._id)}
-                                style={{
-                                    padding: '0.5rem 1rem',
-                                    backgroundColor: 'var(--error)',
-                                    color: 'white',
-                                    border: 'none',
-                                    borderRadius: '4px',
-                                    cursor: 'pointer'
-                                }}
-                            >
-                                Delete
-                            </button>
-                        </div>
+
+                        <form onSubmit={handleSubmit} className={styles.form}>
+                            <div className={styles.formGrid}>
+                                <div className={styles.field}>
+                                    <label>Full Name</label>
+                                    <input
+                                        type="text"
+                                        value={formData.name}
+                                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                        required
+                                        placeholder="e.g. John Doe"
+                                    />
+                                </div>
+
+                                <div className={styles.field}>
+                                    <label>Role</label>
+                                    <input
+                                        type="text"
+                                        value={formData.role}
+                                        onChange={(e) => setFormData({ ...formData, role: e.target.value })}
+                                        required
+                                        placeholder="e.g. Principal Architect"
+                                    />
+                                </div>
+
+                                <div className={styles.field}>
+                                    <label>Sort Order</label>
+                                    <input
+                                        type="number"
+                                        value={formData.order}
+                                        onChange={(e) => setFormData({ ...formData, order: parseInt(e.target.value) || 0 })}
+                                        placeholder="0"
+                                    />
+                                </div>
+                            </div>
+
+                            <div className={styles.formGrid}>
+                                <div className={styles.field}>
+                                    <label>Email (Optional)</label>
+                                    <input
+                                        type="email"
+                                        value={formData.email}
+                                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                        placeholder="john@example.com"
+                                    />
+                                </div>
+                                <div className={styles.field}>
+                                    <label>Phone (Optional)</label>
+                                    <input
+                                        type="text"
+                                        value={formData.phone}
+                                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                                        placeholder="+91 ..."
+                                    />
+                                </div>
+                            </div>
+
+                            <div className={styles.field}>
+                                <label>Biography</label>
+                                <textarea
+                                    value={formData.description}
+                                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                                    rows={4}
+                                    placeholder="Briefly describe their background and expertise..."
+                                />
+                            </div>
+
+                            <div className={styles.uploadSection}>
+                                <ImageUpload
+                                    label="Profile Image"
+                                    value={formData.image}
+                                    onChange={(value) => setFormData({ ...formData, image: value })}
+                                />
+                            </div>
+
+                            <div className={styles.formActions}>
+                                <button type="button" onClick={handleCancel} className={styles.cancelBtn}>
+                                    Cancel
+                                </button>
+                                <button type="submit" className={styles.submitBtn}>
+                                    {editingId ? "Update Member" : "Save Member"}
+                                </button>
+                            </div>
+                        </form>
                     </div>
-                ))}
-            </div>
+                )}
+
+                <div className={styles.statsBar}>
+                    <div className={styles.statItem}>
+                        <span className={styles.statLabel}>Total Members</span>
+                        <span className={styles.statValue}>{members.length}</span>
+                    </div>
+                </div>
+
+                <div className={styles.projectGrid}>
+                    {members.map((member) => (
+                        <div key={member._id} className={styles.projectCard}>
+                            <div className={styles.projectImage}>
+                                <Image
+                                    src={member.image}
+                                    alt={member.name}
+                                    fill
+                                    style={{ objectFit: 'cover' }}
+                                />
+                                <div className={styles.categoryBadge}>Order: {member.order}</div>
+                            </div>
+                            <div className={styles.projectContent}>
+                                <h3>{member.name}</h3>
+                                <p className={styles.location}>
+                                    <span>👤</span> {member.role}
+                                </p>
+                                {member.email && <p className={styles.description}>📧 {member.email}</p>}
+                                {member.phone && <p className={styles.description}>📞 {member.phone}</p>}
+                                <div className={styles.cardActions}>
+                                    <button
+                                        onClick={() => handleEdit(member)}
+                                        className={styles.editBtn}
+                                    >
+                                        Edit
+                                    </button>
+                                    <button
+                                        onClick={() => handleDelete(member._id)}
+                                        className={styles.deleteBtn}
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </main>
         </div>
     );
 }

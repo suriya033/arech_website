@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
 export default function MultiImageUpload({ values = [], onChange, label = "Images" }) {
     const [uploadMethod, setUploadMethod] = useState("url");
@@ -147,16 +148,16 @@ export default function MultiImageUpload({ values = [], onChange, label = "Image
                                         📄
                                     </div>
                                 ) : (
-                                    <img
+                                    <Image
                                         src={img}
                                         alt={`Image ${index + 1}`}
+                                        fill
                                         style={{
-                                            width: '100%',
-                                            height: '100%',
                                             objectFit: 'cover',
                                             borderRadius: '8px',
                                             border: '1px solid var(--border)'
                                         }}
+                                        unoptimized
                                     />
                                 )}
                                 <button

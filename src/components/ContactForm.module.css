@@ -99,10 +99,26 @@
 
 @media (max-width: 768px) {
     .container {
-        padding: 2rem 1.5rem;
+        padding: 2.5rem 1.5rem;
     }
 
     .successTitle {
         font-size: 1.5rem;
+    }
+
+    .label {
+        font-size: 0.9rem;
+    }
+
+    .input,
+    .select,
+    .textarea {
+        padding: 0.75rem 0.875rem;
+        font-size: 0.95rem;
+    }
+
+    .submitBtn {
+        padding: 0.875rem;
+        font-size: 0.95rem;
     }
 }

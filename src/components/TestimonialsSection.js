@@ -1,4 +1,5 @@
 "use client";
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import styles from './TestimonialsSection.module.css';
 
@@ -24,12 +25,14 @@ export default function TestimonialsSection() {
                 <div className={`${styles.grid} stagger-container`}>
                     {testimonials.map(t => (
                         <div key={t._id} className={`${styles.testimonialCard} reveal`}>
-                            <p className={styles.quote}>"{t.content}"</p>
+                            <p className={styles.quote}>&quot;{t.content}&quot;</p>
                             <div className={styles.author}>
                                 {t.image && (
-                                    <img
+                                    <Image
                                         src={t.image}
                                         alt={t.name}
+                                        width={60}
+                                        height={60}
                                         className={styles.avatar}
                                     />
                                 )}

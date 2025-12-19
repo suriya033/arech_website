@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import ImageUpload from "@/components/ImageUpload";
 
 export default function TestimonialsManagement() {
@@ -174,10 +175,12 @@ export default function TestimonialsManagement() {
                         }}
                     >
                         {item.image && (
-                            <img
+                            <Image
                                 src={item.image}
                                 alt={item.name}
-                                style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '50%' }}
+                                width={80}
+                                height={80}
+                                style={{ objectFit: 'cover', borderRadius: '50%' }}
                             />
                         )}
                         <div style={{ flex: 1 }}>

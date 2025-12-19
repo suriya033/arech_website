@@ -3,7 +3,9 @@
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import MultiImageUpload from "@/components/MultiImageUpload";
+import AdminSidebar from "@/components/AdminSidebar";
 import styles from "../admin.module.css";
 
 export default function ProjectsManagement() {
@@ -12,6 +14,7 @@ export default function ProjectsManagement() {
     const [projects, setProjects] = useState([]);
     const [loading, setLoading] = useState(true);
     const [editingId, setEditingId] = useState(null);
+    const [showForm, setShowForm] = useState(false);
     const [formData, setFormData] = useState({
         title: "",
         category: "Residential",
@@ -60,11 +63,12 @@ export default function ProjectsManagement() {
                 fetchProjects();
                 setFormData({ title: "", category: "Residential", location: "", image: "", images: [], description: "" });
                 setEditingId(null);
-                alert(editingId ? "Project updated!" : "Project added!");
+                setShowForm(false);
+                alert(editingId ? "Project updated successfully!" : "Project added successfully!");
             }
         } catch (error) {
             console.error("Error:", error);
-            alert("Something went wrong");
+            alert("Something went wrong. Please try again.");
         }
     };
 
@@ -78,167 +82,190 @@ export default function ProjectsManagement() {
             images: project.images || [project.image],
             description: project.description || ""
         });
+        setShowForm(true);
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     const handleDelete = async (id) => {
-        if (!confirm("Are you sure you want to delete this project?")) return;
+        if (!confirm("Are you sure you want to delete this project? This action cannot be undone.")) return;
 
         try {
             const res = await fetch(`/api/projects?id=${id}`, { method: "DELETE" });
             if (res.ok) {
                 fetchProjects();
-                alert("Project deleted!");
+                alert("Project deleted successfully.");
             }
         } catch (error) {
             console.error("Error:", error);
-            alert("Failed to delete");
+            alert("Failed to delete project.");
         }
     };
 
     const handleCancel = () => {
         setEditingId(null);
+        setShowForm(false);
         setFormData({ title: "", category: "Residential", location: "", image: "", images: [], description: "" });
     };
 
     if (status === "loading" || loading) {
-        return <div style={{ padding: '2rem' }}>Loading...</div>;
+        return (
+            <div className={styles.loadingContainer}>
+                <div className={styles.loader}></div>
+                <p>Loading Projects...</p>
+            </div>
+        );
     }
 
     if (!session) return null;
 
     return (
-        <div style={{ padding: '2rem' }}>
-            <h1 style={{ marginBottom: '2rem' }}>{editingId ? "Edit" : "Add"} Project</h1>
+        <div className={styles.container}>
+            <AdminSidebar />
 
-            <form onSubmit={handleSubmit} style={{ marginBottom: '3rem', maxWidth: '600px' }}>
-                <div style={{ marginBottom: '1rem' }}>
-                    <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>Title</label>
-                    <input
-                        type="text"
-                        value={formData.title}
-                        onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                        required
-                        style={{ width: '100%', padding: '0.75rem', border: '1px solid var(--border)', borderRadius: '4px' }}
-                    />
-                </div>
-
-                <div style={{ marginBottom: '1rem' }}>
-                    <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>Category</label>
-                    <select
-                        value={formData.category}
-                        onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                        required
-                        style={{ width: '100%', padding: '0.75rem', border: '1px solid var(--border)', borderRadius: '4px' }}
-                    >
-                        <option value="Residential">Residential</option>
-                        <option value="Commercial">Commercial</option>
-                        <option value="Interior">Interior</option>
-                        <option value="Landscape">Landscape</option>
-                    </select>
-                </div>
-
-                <div style={{ marginBottom: '1rem' }}>
-                    <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>Location</label>
-                    <input
-                        type="text"
-                        value={formData.location}
-                        onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                        required
-                        style={{ width: '100%', padding: '0.75rem', border: '1px solid var(--border)', borderRadius: '4px' }}
-                    />
-                </div>
-
-                <MultiImageUpload
-                    label="Project Images"
-                    values={formData.images || (formData.image ? [formData.image] : [])}
-                    onChange={(values) => setFormData({ ...formData, images: values, image: values[0] || "" })}
-                />
-
-                <div style={{ marginBottom: '1.5rem' }}>
-                    <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>Description (Optional)</label>
-                    <textarea
-                        value={formData.description}
-                        onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                        rows={4}
-                        style={{ width: '100%', padding: '0.75rem', border: '1px solid var(--border)', borderRadius: '4px', fontFamily: 'inherit' }}
-                    />
-                </div>
-
-                <div style={{ display: 'flex', gap: '1rem' }}>
-                    <button type="submit" className="btn">
-                        {editingId ? "Update Project" : "Add Project"}
-                    </button>
-                    {editingId && (
-                        <button type="button" onClick={handleCancel} className="btn-outline">
-                            Cancel
+            <main className={styles.main}>
+                <div className={styles.header}>
+                    <div>
+                        <h1>Projects Management</h1>
+                        <p>Manage your architectural portfolio and showcase your best work.</p>
+                    </div>
+                    {!showForm && (
+                        <button
+                            onClick={() => setShowForm(true)}
+                            className={styles.addBtn}
+                        >
+                            <span>+</span> Add New Project
                         </button>
                     )}
                 </div>
-            </form>
 
-            <h2 style={{ marginBottom: '1.5rem' }}>Projects ({projects.length})</h2>
-            <div className={styles.projectList}>
-                {projects.map((project) => (
-                    <div
-                        key={project._id}
-                        style={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            gap: '1rem',
-                            padding: '1.5rem',
-                            border: '1px solid var(--border)',
-                            borderRadius: '8px',
-                            backgroundColor: 'white',
-                            boxShadow: '0 2px 4px rgba(0,0,0,0.05)'
-                        }}
-                    >
-                        <div style={{ position: 'relative', height: '200px', width: '100%' }}>
-                            <img
-                                src={project.image}
-                                alt={project.title}
-                                style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px' }}
-                            />
+                {showForm && (
+                    <div className={styles.formCard}>
+                        <div className={styles.formHeader}>
+                            <h2>{editingId ? "Edit Project" : "Add New Project"}</h2>
+                            <button onClick={handleCancel} className={styles.closeBtn}>&times;</button>
                         </div>
-                        <div style={{ flex: 1 }}>
-                            <h3 style={{ marginBottom: '0.5rem', fontSize: '1.25rem' }}>{project.title}</h3>
-                            <p style={{ color: 'var(--accent)', marginBottom: '0.25rem', fontWeight: '500' }}>{project.category}</p>
-                            <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginBottom: '0.5rem' }}>{project.location}</p>
-                            {project.description && <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{project.description}</p>}
-                        </div>
-                        <div style={{ display: 'flex', gap: '0.5rem', marginTop: 'auto' }}>
-                            <button
-                                onClick={() => handleEdit(project)}
-                                style={{
-                                    flex: 1,
-                                    padding: '0.5rem',
-                                    backgroundColor: 'var(--primary)',
-                                    color: 'white',
-                                    border: 'none',
-                                    borderRadius: '4px',
-                                    cursor: 'pointer'
-                                }}
-                            >
-                                Edit
-                            </button>
-                            <button
-                                onClick={() => handleDelete(project._id)}
-                                style={{
-                                    flex: 1,
-                                    padding: '0.5rem',
-                                    backgroundColor: '#fee2e2',
-                                    color: '#ef4444',
-                                    border: 'none',
-                                    borderRadius: '4px',
-                                    cursor: 'pointer'
-                                }}
-                            >
-                                Delete
-                            </button>
-                        </div>
+
+                        <form onSubmit={handleSubmit} className={styles.form}>
+                            <div className={styles.formGrid}>
+                                <div className={styles.field}>
+                                    <label>Project Title</label>
+                                    <input
+                                        type="text"
+                                        value={formData.title}
+                                        onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                                        required
+                                        placeholder="e.g. Modern Villa"
+                                    />
+                                </div>
+
+                                <div className={styles.field}>
+                                    <label>Category</label>
+                                    <select
+                                        value={formData.category}
+                                        onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                                        required
+                                    >
+                                        <option value="Residential">Residential</option>
+                                        <option value="Commercial">Commercial</option>
+                                        <option value="Interior">Interior</option>
+                                        <option value="Landscape">Landscape</option>
+                                    </select>
+                                </div>
+
+                                <div className={styles.field}>
+                                    <label>Location</label>
+                                    <input
+                                        type="text"
+                                        value={formData.location}
+                                        onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+                                        required
+                                        placeholder="e.g. Chennai, India"
+                                    />
+                                </div>
+                            </div>
+
+                            <div className={styles.field}>
+                                <label>Description</label>
+                                <textarea
+                                    value={formData.description}
+                                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                                    rows={4}
+                                    placeholder="Describe the project details, challenges, and outcomes..."
+                                />
+                            </div>
+
+                            <div className={styles.uploadSection}>
+                                <MultiImageUpload
+                                    label="Project Images"
+                                    values={formData.images || (formData.image ? [formData.image] : [])}
+                                    onChange={(values) => setFormData({ ...formData, images: values, image: values[0] || "" })}
+                                />
+                            </div>
+
+                            <div className={styles.formActions}>
+                                <button type="button" onClick={handleCancel} className={styles.cancelBtn}>
+                                    Cancel
+                                </button>
+                                <button type="submit" className={styles.submitBtn}>
+                                    {editingId ? "Update Project" : "Save Project"}
+                                </button>
+                            </div>
+                        </form>
                     </div>
-                ))}
-            </div>
+                )}
+
+                <div className={styles.statsBar}>
+                    <div className={styles.statItem}>
+                        <span className={styles.statLabel}>Total Projects</span>
+                        <span className={styles.statValue}>{projects.length}</span>
+                    </div>
+                    <div className={styles.statItem}>
+                        <span className={styles.statLabel}>Categories</span>
+                        <span className={styles.statValue}>
+                            {[...new Set(projects.map(p => p.category))].length}
+                        </span>
+                    </div>
+                </div>
+
+                <div className={styles.projectGrid}>
+                    {projects.map((project) => (
+                        <div key={project._id} className={styles.projectCard}>
+                            <div className={styles.projectImage}>
+                                <Image
+                                    src={project.image}
+                                    alt={project.title}
+                                    fill
+                                    style={{ objectFit: 'cover' }}
+                                />
+                                <div className={styles.categoryBadge}>{project.category}</div>
+                            </div>
+                            <div className={styles.projectContent}>
+                                <h3>{project.title}</h3>
+                                <p className={styles.location}>
+                                    <span>📍</span> {project.location}
+                                </p>
+                                {project.description && (
+                                    <p className={styles.description}>{project.description}</p>
+                                )}
+                                <div className={styles.cardActions}>
+                                    <button
+                                        onClick={() => handleEdit(project)}
+                                        className={styles.editBtn}
+                                    >
+                                        Edit
+                                    </button>
+                                    <button
+                                        onClick={() => handleDelete(project._id)}
+                                        className={styles.deleteBtn}
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </main>
         </div>
     );
 }

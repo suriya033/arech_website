@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import styles from "./ProjectsGallery.module.css";
 
 const categories = ["All", "Residential", "Commercial", "Interior", "Landscape"];
@@ -96,7 +97,13 @@ export default function ProjectsGallery() {
                         style={{ cursor: 'pointer' }}
                     >
                         <div className={styles.imageContainer}>
-                            <img src={project.image} alt={project.title} className={styles.image} />
+                            <Image
+                                src={project.image}
+                                alt={project.title}
+                                fill
+                                className={styles.image}
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                            />
                         </div>
                         <div className={styles.content}>
                             <span className={styles.category}>{project.category}</span>
@@ -118,10 +125,13 @@ export default function ProjectsGallery() {
 
                         {/* Image Slider */}
                         <div className={styles.sliderContainer}>
-                            <img
+                            <Image
                                 src={getProjectImages(selectedProject)[currentImageIndex]}
                                 alt={selectedProject.title}
+                                fill
                                 className={styles.sliderImage}
+                                sizes="100vw"
+                                priority
                             />
 
                             {getProjectImages(selectedProject).length > 1 && (

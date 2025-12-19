@@ -2,6 +2,7 @@ import dbConnect from "@/lib/db";
 import TeamMember from "@/models/TeamMember";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import styles from "./MemberProfile.module.css";
 import ScrollReveal from "@/components/ScrollReveal";
 
@@ -52,9 +53,13 @@ export default async function MemberDetails({ params }) {
                     {/* Image Column */}
                     <div className={`${styles.imageWrapper} reveal-left`}>
                         <div className={styles.imageContainer}>
-                            <img
+                            <Image
                                 src={member.image}
                                 alt={member.name}
+                                fill
+                                style={{ objectFit: 'cover' }}
+                                sizes="(max-width: 768px) 100vw, 40vw"
+                                priority
                             />
                         </div>
                         <div className={styles.imageDecoration}></div>

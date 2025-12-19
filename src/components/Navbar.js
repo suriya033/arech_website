@@ -2,12 +2,14 @@
 
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import styles from "./Navbar.module.css";
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const ctaRef = useRef(null);
+    const pathname = usePathname();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -41,6 +43,8 @@ export default function Navbar() {
             cta.removeEventListener("mouseleave", handleMouseLeave);
         };
     }, []);
+
+    if (pathname.startsWith("/admin")) return null;
 
     return (
         <header className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}>

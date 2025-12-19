@@ -35,7 +35,7 @@ export default function Home() {
         <div className={styles.intro}>
           <h2 className="reveal">Welcome to varsha and pradeep architects</h2>
           <p className="reveal">
-            “Our corporate office in Chennai stands testimony to your ability to convert our abstract ideas on transparency, space, elegance, simplicity, innovation, contemporariness, and green into something graceful, functional, and different.”
+            &ldquo;Our corporate office in Chennai stands testimony to your ability to convert our abstract ideas on transparency, space, elegance, simplicity, innovation, contemporariness, and green into something graceful, functional, and different.&rdquo;
           </p>
           <Link href="/about" className="btn-outline reveal">
             Learn More About Us
@@ -73,7 +73,7 @@ export default function Home() {
       <section className="section container">
         <div className={styles.projectsHeader}>
           <div>
-            <h2 className="reveal-left">Featured Projects</h2>
+            <h2 className="reveal-left" style={{ textAlign: 'center' }}>Featured Projects</h2>
             <p className="reveal-left" style={{ marginBottom: 0 }}>Discover our latest architectural achievements.</p>
           </div>
           <Link href="/projects" className="btn-outline reveal-right">
@@ -84,10 +84,12 @@ export default function Home() {
         <div className={`${styles.projectsGrid} stagger-container`}>
           {/* Project 1 */}
           <div className={styles.projectCard}>
-            <img
+            <Image
               src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop"
               alt="Modern Residence"
+              fill
               className={styles.projectImage}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
             <div className={styles.projectOverlay}>
               <p>Residential</p>
@@ -96,10 +98,12 @@ export default function Home() {
           </div>
           {/* Project 2 */}
           <div className={styles.projectCard}>
-            <img
+            <Image
               src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop"
               alt="Corporate HQ"
+              fill
               className={styles.projectImage}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
             <div className={styles.projectOverlay}>
               <p>Commercial</p>
@@ -108,10 +112,12 @@ export default function Home() {
           </div>
           {/* Project 3 */}
           <div className={styles.projectCard}>
-            <img
+            <Image
               src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2053&auto=format&fit=crop"
               alt="Urban Loft"
+              fill
               className={styles.projectImage}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
             <div className={styles.projectOverlay}>
               <p>Interior</p>

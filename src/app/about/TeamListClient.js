@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import styles from "./TeamList.module.css";
 
 export default function TeamListClient() {
@@ -69,10 +70,13 @@ export default function TeamListClient() {
                         {member._id ? (
                             <Link href={`/about/team/${member._id}`} className={styles.cardLink}>
                                 <div className={styles.imageContainer}>
-                                    <img
+                                    <Image
                                         src={member.image || "https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=1000&auto=format&fit=crop"}
                                         alt={member.name}
+                                        fill
                                         className={styles.memberImage}
+                                        style={{ objectFit: 'cover' }}
+                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                     />
                                     <div className={styles.imageOverlay}>
                                         <span className={styles.viewProfile}>View Profile</span>
@@ -87,10 +91,13 @@ export default function TeamListClient() {
                         ) : (
                             <div className={styles.cardLink}>
                                 <div className={styles.imageContainer}>
-                                    <img
+                                    <Image
                                         src={member.image || "https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=1000&auto=format&fit=crop"}
                                         alt={member.name}
+                                        fill
                                         className={styles.memberImage}
+                                        style={{ objectFit: 'cover' }}
+                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                     />
                                 </div>
 

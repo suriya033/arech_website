@@ -2,6 +2,7 @@ import PageHeader from "@/components/PageHeader";
 import dbConnect from "@/lib/db";
 import Blog from "@/models/Blog";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 
 export async function generateMetadata({ params }) {
     try {
@@ -47,8 +48,15 @@ export default async function BlogPost({ params }) {
 
             <article className="section container" style={{ maxWidth: '800px' }}>
                 {post.image && (
-                    <div style={{ marginBottom: '2rem', borderRadius: '8px', overflow: 'hidden' }}>
-                        <img src={post.image} alt={post.title} style={{ width: '100%', height: 'auto', display: 'block' }} />
+                    <div style={{ marginBottom: '2rem', borderRadius: '8px', overflow: 'hidden', position: 'relative', height: '450px' }}>
+                        <Image
+                            src={post.image}
+                            alt={post.title}
+                            fill
+                            style={{ objectFit: 'cover' }}
+                            sizes="(max-width: 800px) 100vw, 800px"
+                            priority
+                        />
                     </div>
                 )}
 

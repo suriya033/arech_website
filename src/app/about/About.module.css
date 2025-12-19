@@ -108,7 +108,7 @@
 
 @media (max-width: 768px) {
     .aboutSection {
-        padding: var(--spacing-lg) 0;
+        padding: 4rem 0;
     }
 
     .storyGrid {
@@ -116,16 +116,37 @@
         gap: 3rem;
     }
 
+    .storyContent h2 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .storyContent p {
+        font-size: 1.05rem;
+        line-height: 1.7;
+    }
+
     .storyImage {
-        height: 350px;
+        height: 300px;
+        order: -1;
+        /* Image first on mobile */
     }
 
     .philosophySection {
-        padding: var(--spacing-lg) 0;
+        padding: 4rem 0;
     }
 
     .philosophyCard {
         padding: 2.5rem 1.5rem;
+    }
+
+    .quote {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .philosophyText {
+        font-size: 1rem;
     }
 
     .teamHeader {

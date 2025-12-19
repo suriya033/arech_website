@@ -1,3 +1,4 @@
+import Image from "next/image";
 import PageHeroSlider from "@/components/PageHeroSlider";
 import Link from "next/link";
 import dbConnect from "@/lib/db";
@@ -6,6 +7,11 @@ import Blog from "@/models/Blog";
 export const metadata = {
     title: "Blog | varsha and pradeep architects",
     description: "Insights, trends, and news from the world of architecture and design.",
+};
+
+export const viewport = {
+    width: "device-width",
+    initialScale: 1,
 };
 
 async function getPosts() {
@@ -49,16 +55,16 @@ export default async function BlogPage() {
                             }}>
                                 {post.image && (
                                     <div style={{ height: '240px', overflow: 'hidden', position: 'relative' }}>
-                                        <img
+                                        <Image
                                             src={post.image}
                                             alt={post.title}
+                                            fill
                                             style={{
-                                                width: '100%',
-                                                height: '100%',
                                                 objectFit: 'cover',
                                                 transition: 'transform 0.5s ease'
                                             }}
                                             className="blog-image"
+                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                         />
                                     </div>
                                 )}

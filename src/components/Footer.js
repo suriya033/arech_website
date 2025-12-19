@@ -1,22 +1,30 @@
+"use client";
+
 import Link from "next/link";
+import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import styles from "./Footer.module.css";
-import dbConnect from "@/lib/db";
-import SiteSettings from "@/models/SiteSettings";
 
-async function getSettings() {
-    try {
-        await dbConnect();
-        let settings = await SiteSettings.findOne();
-        if (!settings) return {};
-        return settings;
-    } catch (error) {
-        console.warn("Failed to fetch settings:", error.message);
-        return {};
-    }
-}
+export default function Footer() {
+    const [settings, setSettings] = useState({});
+    const pathname = usePathname();
 
-export default async function Footer() {
-    const settings = await getSettings();
+    useEffect(() => {
+        async function fetchSettings() {
+            try {
+                const res = await fetch("/api/settings");
+                if (res.ok) {
+                    const data = await res.json();
+                    setSettings(data);
+                }
+            } catch (error) {
+                console.warn("Failed to fetch settings:", error.message);
+            }
+        }
+        fetchSettings();
+    }, []);
+
+    if (pathname.startsWith("/admin")) return null;
 
     return (
         <footer className={styles.footer}>
@@ -84,4 +92,3 @@ export default async function Footer() {
         </footer>
     );
 }
-

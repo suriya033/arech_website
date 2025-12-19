@@ -1,3 +1,4 @@
+import Image from "next/image";
 import PageHeroSlider from "@/components/PageHeroSlider";
 import TeamListClient from "./TeamListClient";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -6,6 +7,11 @@ import styles from "./About.module.css";
 export const metadata = {
     title: "About Us | varsha and pradeep architects",
     description: "Learn about our firm, our philosophy, and the team behind our award-winning designs.",
+};
+
+export const viewport = {
+    width: "device-width",
+    initialScale: 1,
 };
 
 export default function About() {
@@ -35,15 +41,18 @@ export default function About() {
                                     We believe every project is an opportunity to create functional, beautiful, and enduring environments. Our approach is deeply collaborative—clients are partners, not just commissions. Many of our relationships continue well beyond project completion.
                                 </p>
                                 <p>
-                                    Through our contact page, you can set up a meeting or a call at your earliest convenience. Let's create environments that are functional, beautiful, and enduring.
+                                    Through our contact page, you can set up a meeting or a call at your earliest convenience. Let&apos;s create environments that are functional, beautiful, and enduring.
                                 </p>
                             </div>
                         </div>
                         <div className="reveal-right">
                             <div className={styles.storyImage}>
-                                <img
+                                <Image
                                     src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2031&auto=format&fit=crop"
                                     alt="Our Studio"
+                                    fill
+                                    className={styles.image}
+                                    sizes="(max-width: 768px) 100vw, 50vw"
                                 />
                             </div>
                         </div>
@@ -83,6 +92,3 @@ export default function About() {
         </main>
     );
 }
-
-
-

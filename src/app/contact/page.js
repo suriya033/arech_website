@@ -11,6 +11,11 @@ export const metadata = {
     description: "Get in touch with us to discuss your next project.",
 };
 
+export const viewport = {
+    width: "device-width",
+    initialScale: 1,
+};
+
 async function getSettings() {
     try {
         await dbConnect();
@@ -47,7 +52,7 @@ export default async function Contact() {
                             <div className={styles.infoContent}>
                                 <h2>Get in Touch</h2>
                                 <p className={styles.lead}>
-                                    Have a project in mind? Fill out the form or contact us directly. We're here to help you bring your vision to life.
+                                    Have a project in mind? Fill out the form or contact us directly. We&apos;re here to help you bring your vision to life.
                                 </p>
 
                                 <div className={styles.infoGrid}>
@@ -93,8 +98,6 @@ export default async function Contact() {
                     </div>
                 </div>
             </section>
-        </main>
+        </main >
     );
 }
-
-
