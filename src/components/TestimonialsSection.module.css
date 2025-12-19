@@ -1,0 +1,116 @@
+.testimonialsSection {
+    padding: var(--spacing-xl) 0;
+    background-color: var(--secondary);
+    position: relative;
+    overflow: hidden;
+}
+
+.testimonialsSection::before {
+    content: '"';
+    position: absolute;
+    top: -50px;
+    left: 50px;
+    font-size: 20rem;
+    color: rgba(197, 160, 89, 0.05);
+    font-family: serif;
+    line-height: 1;
+}
+
+.titleContainer {
+    text-align: center;
+    margin-bottom: 4rem;
+    position: relative;
+    z-index: 1;
+}
+
+.titleContainer h2 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+}
+
+.titleContainer p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.testimonialCard {
+    background: white;
+    padding: 3rem 2.5rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    transition: all 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.testimonialCard:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--accent);
+}
+
+.quote {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--foreground);
+    margin-bottom: 2rem;
+    font-style: italic;
+    position: relative;
+}
+
+.author {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--accent);
+}
+
+.authorInfo h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    color: var(--primary);
+}
+
+.authorInfo p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .testimonialsSection {
+        padding: var(--spacing-lg) 0;
+    }
+
+    .titleContainer {
+        margin-bottom: 2.5rem;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .testimonialCard {
+        padding: 2rem 1.5rem;
+    }
+}

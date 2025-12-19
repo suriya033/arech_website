@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import PageHeroSlider from "@/components/PageHeroSlider";
 import CareerApplicationForm from "@/components/CareerApplicationForm";
+import ScrollReveal from "@/components/ScrollReveal";
 import styles from "./careers.module.css";
 
 export default function Careers() {
@@ -27,6 +28,7 @@ export default function Careers() {
 
     return (
         <main>
+            <ScrollReveal />
             <PageHeroSlider
                 title="Careers"
                 description="Join our team and help us create timeless spaces."

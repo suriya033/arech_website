@@ -1,6 +1,8 @@
 import PageHeroSlider from "@/components/PageHeroSlider";
 import dbConnect from "@/lib/db";
 import Service from "@/models/Service";
+import ScrollReveal from "@/components/ScrollReveal";
+import styles from "./services.module.css";
 
 export const metadata = {
     title: "Services | varsha and pradeep architects",
@@ -22,9 +24,10 @@ export default async function Services() {
 
     return (
         <main>
+            <ScrollReveal />
             <PageHeroSlider
                 title="Our Services"
-                description="We offer a full range of architectural and design services to bring your vision to life."
+                description="We offer a full range of architectural and design services to bring your vision to life through innovation and excellence."
                 images={[
                     "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2031&auto=format&fit=crop",
                     "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop",
@@ -32,53 +35,50 @@ export default async function Services() {
                 ]}
             />
 
-            <section className="section container">
+            <section className={`${styles.servicesSection} container`}>
                 {services.length > 0 ? (
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+                    <div className={styles.grid}>
                         {services.map((service) => (
-                            <div key={service._id} style={{
-                                padding: '2rem',
-                                border: '1px solid var(--border)',
-                                borderRadius: '8px',
-                                transition: 'transform 0.3s ease',
-                                backgroundColor: 'var(--background)'
-                            }}>
-                                <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>{service.icon || "🛠️"}</div>
-                                <h3 style={{ marginBottom: '1rem' }}>{service.title}</h3>
-                                <p>{service.description}</p>
+                            <div key={service._id} className={`${styles.card} reveal`}>
+                                <div className={styles.iconContainer}>
+                                    {service.icon || "🛠️"}
+                                </div>
+                                <h3 className={styles.title}>{service.title}</h3>
+                                <p className={styles.description}>{service.description}</p>
                             </div>
                         ))}
                     </div>
                 ) : (
-                    <p style={{ textAlign: 'center' }}>No services listed yet.</p>
+                    <p style={{ textAlign: 'center', fontSize: '1.2rem', color: 'var(--text-muted)' }}>No services listed yet.</p>
                 )}
             </section>
 
-            <section className="section container" style={{ textAlign: 'center', backgroundColor: 'var(--secondary)', padding: '4rem 2rem', borderRadius: '16px', marginTop: '2rem' }}>
-                <h2>How We Work</h2>
-                <p style={{ maxWidth: '600px', margin: '1rem auto 2rem' }}>
-                    Our process is collaborative and transparent. We work closely with you at every stage to ensure your complete satisfaction.
-                </p>
-                <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '2rem' }}>
-                    {['Consultation', 'Concept Design', 'Development', 'Execution', 'Handover'].map((step, i) => (
-                        <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                            <div style={{
-                                width: '50px',
-                                height: '50px',
-                                borderRadius: '50%',
-                                backgroundColor: 'var(--foreground)',
-                                color: 'var(--background)',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                fontWeight: 'bold',
-                                marginBottom: '1rem'
-                            }}>
-                                {i + 1}
+            <section className={styles.processSection}>
+                <div className="container">
+                    <div className={styles.processHeader}>
+                        <h2 className="reveal">How We Work</h2>
+                        <p className="reveal">
+                            Our process is collaborative and transparent, ensuring every detail aligns with your vision.
+                        </p>
+                    </div>
+
+                    <div className={styles.processGrid}>
+                        {['Consultation', 'Concept Design', 'Development', 'Execution', 'Handover'].map((step, i) => (
+                            <div key={i} className={`${styles.processStep} reveal`}>
+                                <div className={styles.stepNumber}>
+                                    {i + 1}
+                                </div>
+                                <h4 className={styles.stepTitle}>{step}</h4>
+                                <p className={styles.stepDescription}>
+                                    {i === 0 && "Initial meeting to understand your vision and requirements."}
+                                    {i === 1 && "Developing the core architectural concepts and sketches."}
+                                    {i === 2 && "Refining designs and preparing technical documentation."}
+                                    {i === 3 && "Overseeing construction and ensuring quality standards."}
+                                    {i === 4 && "Final inspection and delivering your completed project."}
+                                </p>
                             </div>
-                            <span style={{ fontWeight: '500' }}>{step}</span>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
             </section>
         </main>

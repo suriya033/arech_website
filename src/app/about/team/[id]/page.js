@@ -1,8 +1,9 @@
-import PageHeader from "@/components/PageHeader";
 import dbConnect from "@/lib/db";
 import TeamMember from "@/models/TeamMember";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import styles from "./MemberProfile.module.css";
+import ScrollReveal from "@/components/ScrollReveal";
 
 export async function generateMetadata({ params }) {
     try {
@@ -40,127 +41,58 @@ export default async function MemberDetails({ params }) {
     }
 
     return (
-        <main>
-            <PageHeader
-                title={member.name}
-                description={member.role}
-            />
+        <main className={styles.profileContainer}>
+            <ScrollReveal />
+            <div className="container">
+                <Link href="/about" className={styles.backLink}>
+                    ← Back to Team
+                </Link>
 
-            <section className="section container">
-                <div style={{ marginBottom: '2rem' }}>
-                    <Link href="/about" style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '0.5rem',
-                        color: 'var(--text-muted)',
-                        textDecoration: 'none',
-                        fontWeight: '500',
-                        transition: 'color 0.3s'
-                    }} className="hover-accent">
-                        ← Back to Team
-                    </Link>
-                </div>
-
-                <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-                    gap: '4rem',
-                    alignItems: 'start'
-                }}>
+                <div className={styles.grid}>
                     {/* Image Column */}
-                    <div style={{ position: 'relative' }}>
-                        <div style={{
-                            borderRadius: '16px',
-                            overflow: 'hidden',
-                            boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
-                            position: 'relative',
-                            zIndex: 1
-                        }}>
+                    <div className={`${styles.imageWrapper} reveal-left`}>
+                        <div className={styles.imageContainer}>
                             <img
                                 src={member.image}
                                 alt={member.name}
-                                style={{ width: '100%', height: 'auto', display: 'block' }}
                             />
                         </div>
-                        {/* Decorative element */}
-                        <div style={{
-                            position: 'absolute',
-                            top: '20px',
-                            left: '-20px',
-                            right: '20px',
-                            bottom: '-20px',
-                            border: '2px solid var(--accent)',
-                            borderRadius: '16px',
-                            zIndex: 0,
-                            opacity: 0.3
-                        }}></div>
+                        <div className={styles.imageDecoration}></div>
                     </div>
 
                     {/* Content Column */}
-                    <div>
-                        <h2 style={{
-                            marginBottom: '1.5rem',
-                            fontSize: '2rem',
-                            borderBottom: '2px solid var(--accent)',
-                            display: 'inline-block',
-                            paddingBottom: '0.5rem'
-                        }}>
-                            Biography
-                        </h2>
-                        <div style={{
-                            fontSize: '1.1rem',
-                            lineHeight: '1.8',
-                            whiteSpace: 'pre-wrap',
-                            marginBottom: '3rem',
-                            color: 'var(--foreground)',
-                            opacity: 0.9
-                        }}>
+                    <div className="reveal-right">
+                        <h1 className={styles.name}>{member.name}</h1>
+                        <div className={styles.role}>{member.role}</div>
+
+                        <h2 className={styles.sectionTitle}>Biography</h2>
+                        <div className={styles.bio}>
                             {member.description || "No description available."}
                         </div>
 
                         {(member.email || member.phone) && (
-                            <div style={{
-                                padding: '2.5rem',
-                                backgroundColor: 'var(--background)',
-                                borderRadius: '16px',
-                                border: '1px solid var(--border)',
-                                boxShadow: '0 10px 30px rgba(0,0,0,0.05)'
-                            }}>
-                                <h3 style={{ marginBottom: '1.5rem', fontSize: '1.5rem' }}>Get in Touch</h3>
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                            <div className={`${styles.contactCard} scale-in`}>
+                                <h3 className={styles.contactTitle}>Contact Information</h3>
+                                <div className={styles.contactList}>
                                     {member.email && (
-                                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                                            <div style={{
-                                                width: '40px',
-                                                height: '40px',
-                                                borderRadius: '50%',
-                                                backgroundColor: 'var(--secondary)',
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'center',
-                                                fontSize: '1.2rem'
-                                            }}>📧</div>
+                                        <div className={styles.contactItem}>
+                                            <div className={styles.iconBox}>✉️</div>
                                             <div>
-                                                <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Email</div>
-                                                <a href={`mailto:${member.email}`} style={{ color: 'var(--primary)', fontWeight: '600', textDecoration: 'none' }}>{member.email}</a>
+                                                <div className={styles.contactLabel}>Email</div>
+                                                <a href={`mailto:${member.email}`} className={styles.contactValue}>
+                                                    {member.email}
+                                                </a>
                                             </div>
                                         </div>
                                     )}
                                     {member.phone && (
-                                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                                            <div style={{
-                                                width: '40px',
-                                                height: '40px',
-                                                borderRadius: '50%',
-                                                backgroundColor: 'var(--secondary)',
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'center',
-                                                fontSize: '1.2rem'
-                                            }}>📞</div>
+                                        <div className={styles.contactItem}>
+                                            <div className={styles.iconBox}>📞</div>
                                             <div>
-                                                <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Phone</div>
-                                                <a href={`tel:${member.phone}`} style={{ color: 'var(--primary)', fontWeight: '600', textDecoration: 'none' }}>{member.phone}</a>
+                                                <div className={styles.contactLabel}>Phone</div>
+                                                <a href={`tel:${member.phone}`} className={styles.contactValue}>
+                                                    {member.phone}
+                                                </a>
                                             </div>
                                         </div>
                                     )}
@@ -169,7 +101,7 @@ export default async function MemberDetails({ params }) {
                         )}
                     </div>
                 </div>
-            </section>
+            </div>
         </main>
     );
 }

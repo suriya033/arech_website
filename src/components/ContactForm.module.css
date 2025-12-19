@@ -1,0 +1,108 @@
+.container {
+    padding: 3rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background-color: white;
+    box-shadow: var(--shadow-md);
+}
+
+.successContainer {
+    text-align: center;
+    padding: 2rem;
+}
+
+.successTitle {
+    color: var(--primary);
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.label {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--foreground);
+}
+
+.input,
+.select,
+.textarea {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: var(--secondary);
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    background-color: white;
+    box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.1);
+}
+
+.textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+.submitBtn {
+    padding: 1rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 1rem;
+}
+
+.submitBtn:hover:not(:disabled) {
+    background: #000;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.submitBtn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.error {
+    color: #ef4444;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 2rem 1.5rem;
+    }
+
+    .successTitle {
+        font-size: 1.5rem;
+    }
+}

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import styles from "./Login.module.css";
 
 export default function Login() {
     const [email, setEmail] = useState("");
@@ -32,44 +33,52 @@ export default function Login() {
     };
 
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', backgroundColor: 'var(--secondary)' }}>
-            <div style={{ padding: '3rem', backgroundColor: 'var(--background)', borderRadius: 'var(--radius-lg)', boxShadow: 'var(--shadow-lg)', width: '100%', maxWidth: '450px' }}>
-                <h1 style={{ textAlign: 'center', marginBottom: '0.5rem', fontSize: '2rem' }}>Admin Login</h1>
-                <p style={{ textAlign: 'center', marginBottom: '2rem', color: 'var(--text-muted)' }}>Enter your credentials to access the dashboard.</p>
-                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                    <div>
-                        <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500', fontSize: '0.9rem' }}>Email Address</label>
+        <div className={styles.loginContainer}>
+            <div className={styles.loginCard}>
+                <h1 className={styles.title}>Admin Login</h1>
+                <p className={styles.subtitle}>Enter your credentials to access the dashboard.</p>
+
+                <form onSubmit={handleSubmit} className={styles.form}>
+                    <div className={styles.field}>
+                        <label className={styles.label}>Email Address</label>
                         <input
                             type="email"
                             placeholder="admin@example.com"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            style={{ width: '100%', padding: '0.75rem', border: '1px solid var(--border)', borderRadius: 'var(--radius-sm)', fontSize: '1rem' }}
+                            className={styles.input}
                             required
                         />
                     </div>
-                    <div>
-                        <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500', fontSize: '0.9rem' }}>Password</label>
+
+                    <div className={styles.field}>
+                        <label className={styles.label}>Password</label>
                         <input
                             type="password"
                             placeholder="••••••••"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            style={{ width: '100%', padding: '0.75rem', border: '1px solid var(--border)', borderRadius: 'var(--radius-sm)', fontSize: '1rem' }}
+                            className={styles.input}
                             required
                         />
                     </div>
-                    <button type="submit" className="btn" style={{ width: '100%', marginTop: '1rem' }}>Sign In</button>
+
+                    <button type="submit" className={styles.submitBtn}>
+                        Sign In
+                    </button>
+
                     {error && (
-                        <div style={{ color: 'var(--error)', marginTop: '0.5rem', fontSize: '0.9rem', textAlign: 'center', padding: '0.5rem', backgroundColor: 'rgba(220, 53, 69, 0.1)', borderRadius: 'var(--radius-sm)' }}>
+                        <div className={styles.error}>
                             {error}
                         </div>
                     )}
                 </form>
-                <div style={{ marginTop: '2rem', textAlign: 'center', fontSize: '0.9rem' }}>
-                    <Link href="/" style={{ color: 'var(--text-muted)' }}>&larr; Back to Website</Link>
-                </div>
+
+                <Link href="/" className={styles.backLink}>
+                    &larr; Back to Website
+                </Link>
             </div>
         </div>
     );
 }
+

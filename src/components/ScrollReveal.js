@@ -4,27 +4,50 @@ import { useEffect } from "react";
 
 export default function ScrollReveal() {
     useEffect(() => {
-        const reveals = document.querySelectorAll(".reveal");
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
 
-        function revealOnScroll() {
-            const windowHeight = window.innerHeight;
-            const revealPoint = 100;
-
-            reveals.forEach((el) => {
-                const revealTop = el.getBoundingClientRect().top;
-
-                if (revealTop < windowHeight - revealPoint) {
-                    el.classList.add("active");
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("active");
                 }
             });
-        }
+        }, observerOptions);
 
-        window.addEventListener("scroll", revealOnScroll);
-        // Trigger once on mount to check initial state
-        revealOnScroll();
+        const selectors = '.reveal, .reveal-left, .reveal-right, .scale-in, .stagger-container';
+
+        // Initial observation
+        const revealElements = document.querySelectorAll(selectors);
+        revealElements.forEach(el => observer.observe(el));
+
+        // Watch for new elements added to the DOM
+        const mutationObserver = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                mutation.addedNodes.forEach((node) => {
+                    if (node.nodeType === 1) { // Element node
+                        // Check if the node itself matches
+                        if (node.matches(selectors)) {
+                            observer.observe(node);
+                        }
+                        // Check children
+                        node.querySelectorAll(selectors).forEach(el => observer.observe(el));
+                    }
+                });
+            });
+        });
+
+        mutationObserver.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
 
         return () => {
-            window.removeEventListener("scroll", revealOnScroll);
+            observer.disconnect();
+            mutationObserver.disconnect();
         };
     }, []);
 

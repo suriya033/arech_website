@@ -1,6 +1,50 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import styles from "./StatsSection.module.css";
+
+const Counter = ({ end, duration = 2000 }) => {
+    const [count, setCount] = useState(0);
+    const countRef = useRef(null);
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                }
+            },
+            { threshold: 0.1 }
+        );
+
+        if (countRef.current) {
+            observer.observe(countRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, []);
+
+    useEffect(() => {
+        if (!isVisible) return;
+
+        let start = 0;
+        const increment = end / (duration / 16);
+        const timer = setInterval(() => {
+            start += increment;
+            if (start >= end) {
+                setCount(end);
+                clearInterval(timer);
+            } else {
+                setCount(Math.floor(start));
+            }
+        }, 16);
+
+        return () => clearInterval(timer);
+    }, [isVisible, end, duration]);
+
+    return <span ref={countRef}>{count}</span>;
+};
 
 export default function StatsSection() {
     const [stats, setStats] = useState({
@@ -23,30 +67,27 @@ export default function StatsSection() {
     }, []);
 
     return (
-        <section className="section container" style={{ padding: '4rem 2rem' }}>
-            <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-                gap: '2rem',
-                textAlign: 'center'
-            }}>
-                <div style={{ padding: '2rem', backgroundColor: '#f9f9f9', borderRadius: '16px' }}>
-                    <div style={{ fontSize: '3rem', fontWeight: 'bold', color: 'var(--primary)', marginBottom: '0.5rem' }}>
-                        {stats.ongoingProjects}+
+        <section className={styles.statsSection}>
+            <div className="container">
+                <div className={styles.grid}>
+                    <div className={`${styles.statCard} reveal`}>
+                        <div className={styles.number}>
+                            <Counter end={stats.ongoingProjects} />+
+                        </div>
+                        <div className={styles.label}>Ongoing Projects</div>
                     </div>
-                    <div style={{ fontSize: '1.1rem', color: 'var(--text-muted)' }}>Ongoing Projects</div>
-                </div>
-                <div style={{ padding: '2rem', backgroundColor: '#f9f9f9', borderRadius: '16px' }}>
-                    <div style={{ fontSize: '3rem', fontWeight: 'bold', color: 'var(--primary)', marginBottom: '0.5rem' }}>
-                        {stats.completedProjects}+
+                    <div className={`${styles.statCard} reveal`}>
+                        <div className={styles.number}>
+                            <Counter end={stats.completedProjects} />+
+                        </div>
+                        <div className={styles.label}>Completed Projects</div>
                     </div>
-                    <div style={{ fontSize: '1.1rem', color: 'var(--text-muted)' }}>Completed Projects</div>
-                </div>
-                <div style={{ padding: '2rem', backgroundColor: '#f9f9f9', borderRadius: '16px' }}>
-                    <div style={{ fontSize: '3rem', fontWeight: 'bold', color: 'var(--primary)', marginBottom: '0.5rem' }}>
-                        {stats.publications}+
+                    <div className={`${styles.statCard} reveal`}>
+                        <div className={styles.number}>
+                            <Counter end={stats.publications} />+
+                        </div>
+                        <div className={styles.label}>Publications</div>
                     </div>
-                    <div style={{ fontSize: '1.1rem', color: 'var(--text-muted)' }}>Publications</div>
                 </div>
             </div>
         </section>

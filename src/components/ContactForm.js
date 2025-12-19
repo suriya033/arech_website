@@ -1,6 +1,5 @@
-"use client";
-
 import { useState } from "react";
+import styles from "./ContactForm.module.css";
 
 export default function ContactForm() {
     const [formData, setFormData] = useState({
@@ -34,51 +33,51 @@ export default function ContactForm() {
     };
 
     return (
-        <div style={{ padding: '2rem', border: '1px solid var(--border)', borderRadius: '8px', backgroundColor: 'var(--secondary)' }}>
+        <div className={styles.container}>
             {status === "success" ? (
-                <div style={{ textAlign: 'center', padding: '2rem' }}>
-                    <h3 style={{ color: 'var(--primary)', marginBottom: '1rem' }}>Message Sent!</h3>
+                <div className={styles.successContainer}>
+                    <h3 className={styles.successTitle}>Message Sent! 🎉</h3>
                     <p>Thank you for contacting us. We will get back to you shortly.</p>
                     <button
                         onClick={() => setStatus("idle")}
-                        className="btn-outline"
-                        style={{ marginTop: '1.5rem' }}
+                        className={styles.submitBtn}
+                        style={{ marginTop: '1.5rem', padding: '0.75rem 2rem' }}
                     >
                         Send Another Message
                     </button>
                 </div>
             ) : (
-                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                    <div>
-                        <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>Name</label>
+                <form onSubmit={handleSubmit} className={styles.form}>
+                    <div className={styles.field}>
+                        <label className={styles.label}>Full Name</label>
                         <input
                             type="text"
                             required
                             value={formData.name}
                             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                            style={{ width: '100%', padding: '0.75rem', border: '1px solid var(--border)', borderRadius: '4px' }}
+                            className={styles.input}
                             placeholder="Your Name"
                         />
                     </div>
 
-                    <div>
-                        <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>Email</label>
+                    <div className={styles.field}>
+                        <label className={styles.label}>Email Address</label>
                         <input
                             type="email"
                             required
                             value={formData.email}
                             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                            style={{ width: '100%', padding: '0.75rem', border: '1px solid var(--border)', borderRadius: '4px' }}
+                            className={styles.input}
                             placeholder="your@email.com"
                         />
                     </div>
 
-                    <div>
-                        <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>Subject</label>
+                    <div className={styles.field}>
+                        <label className={styles.label}>Subject</label>
                         <select
                             value={formData.subject}
                             onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                            style={{ width: '100%', padding: '0.75rem', border: '1px solid var(--border)', borderRadius: '4px' }}
+                            className={styles.select}
                         >
                             <option>General Inquiry</option>
                             <option>New Project</option>
@@ -87,29 +86,29 @@ export default function ContactForm() {
                         </select>
                     </div>
 
-                    <div>
-                        <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>Message</label>
+                    <div className={styles.field}>
+                        <label className={styles.label}>Message</label>
                         <textarea
                             rows="5"
                             required
                             value={formData.message}
                             onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                            style={{ width: '100%', padding: '0.75rem', border: '1px solid var(--border)', borderRadius: '4px' }}
+                            className={styles.textarea}
                             placeholder="Tell us about your project..."
                         ></textarea>
                     </div>
 
                     <button
                         type="submit"
-                        className="btn"
-                        style={{ width: '100%' }}
+                        className={styles.submitBtn}
                         disabled={status === "submitting"}
                     >
                         {status === "submitting" ? "Sending..." : "Send Message"}
                     </button>
-                    {status === "error" && <p style={{ color: 'red', textAlign: 'center' }}>Failed to send message. Please try again.</p>}
+                    {status === "error" && <p className={styles.error}>Failed to send message. Please try again.</p>}
                 </form>
             )}
         </div>
     );
 }
+

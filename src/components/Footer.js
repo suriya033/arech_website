@@ -24,36 +24,38 @@ export default async function Footer() {
                 <div className={styles.grid}>
                     <div className={styles.brand}>
                         <h3>varsha and pradeep architects</h3>
-                        <p>Creating timeless spaces that inspire.</p>
+                        <p>Creating timeless architectural masterpieces that blend innovation with functionality. We shape the future of design.</p>
                     </div>
 
                     <div className={styles.column}>
-                        <h4>Quick Links</h4>
+                        <h4>Explore</h4>
                         <ul>
                             <li><Link href="/">Home</Link></li>
-                            <li><Link href="/about">About</Link></li>
-                            <li><Link href="/projects">Projects</Link></li>
+                            <li><Link href="/about">About Us</Link></li>
+                            <li><Link href="/projects">Our Projects</Link></li>
+                            <li><Link href="/services">Services</Link></li>
                             <li><Link href="/careers">Careers</Link></li>
-                            <li><Link href="/contact">Contact</Link></li>
                         </ul>
                     </div>
 
                     <div className={styles.column}>
-                        <h4>Contact</h4>
+                        <h4>Support</h4>
                         <ul>
-                            <li>{settings.phone || "+91 98400 20792"}</li>
-                            <li>{settings.email || "pradeep_vparchitects@yahoo.co.in"}</li>
-                            <li style={{ whiteSpace: 'pre-line', marginTop: '0.5rem' }}>{settings.address || "1/427, KCG College Road, Karapakkam, Chennai - 600097"}</li>
+                            <li><Link href="/contact">Contact Us</Link></li>
+                            <li><Link href="/admin/login">Admin Portal</Link></li>
                         </ul>
+                    </div>
+
+                    <div className={`${styles.column} ${styles.contactInfo}`}>
+                        <h4>Get in Touch</h4>
+                        <p>📍 {settings.address || "1/427, KCG College Road, Karapakkam, Chennai - 600097"}</p>
+                        <p>📞 {settings.phone || "+91 98400 20792"}</p>
+                        <p>✉️ {settings.email || "pradeep_vparchitects@yahoo.co.in"}</p>
                     </div>
                 </div>
 
                 <div className={styles.bottom}>
-                    <p>
-                        &copy; {new Date().getFullYear()} varsha and pradeep architects. All rights reserved.
-                        <span style={{ margin: '0 0.5rem' }}>|</span>
-                        <Link href="/admin/login" className={styles.adminLink}>Admin Login</Link>
-                    </p>
+                    <p>&copy; {new Date().getFullYear()} varsha and pradeep architects. Crafted with excellence.</p>
                     <div className={styles.socialIcons}>
                         {settings.instagram && (
                             <a href={settings.instagram} target="_blank" rel="noopener noreferrer" title="Instagram">
@@ -82,3 +84,4 @@ export default async function Footer() {
         </footer>
     );
 }
+

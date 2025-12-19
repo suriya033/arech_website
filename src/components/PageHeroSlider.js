@@ -15,8 +15,7 @@ export default function PageHeroSlider({ title, description, images = defaultIma
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentIndex((prev) => (prev + 1) % images.length);
-        }, 5000); // Change every 5 seconds
-
+        }, 5000);
         return () => clearInterval(interval);
     }, [images.length]);
 
@@ -30,12 +29,11 @@ export default function PageHeroSlider({ title, description, images = defaultIma
                 />
             ))}
             <div className={styles.overlay}>
-                <div className="container">
+                <div className={styles.content}>
                     <h1 className={styles.title}>{title}</h1>
                     {description && <p className={styles.description}>{description}</p>}
                 </div>
             </div>
         </div>
-        
     );
 }

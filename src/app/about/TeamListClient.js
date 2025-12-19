@@ -15,12 +15,24 @@ export default function TeamListClient() {
     const fetchMembers = async () => {
         try {
             const res = await fetch("/api/team");
-            if (!res.ok) throw new Error("Failed to fetch");
+            if (!res.ok) {
+                const errorData = await res.json().catch(() => ({}));
+                throw new Error(errorData.error || `Failed to fetch: ${res.status}`);
+            }
             const data = await res.json();
-            if (data.length === 0) throw new Error("No data");
-            setMembers(data);
+
+            if (!Array.isArray(data)) {
+                console.error("Received non-array data:", data);
+                throw new Error("Invalid data format received from server");
+            }
+
+            if (data.length === 0) {
+                setMembers([]);
+            } else {
+                setMembers(data);
+            }
         } catch (error) {
-            console.log("Error fetching team:", error.message);
+            console.error("Error fetching team:", error.message);
             setMembers([]);
         } finally {
             setLoading(false);
@@ -49,29 +61,45 @@ export default function TeamListClient() {
     return (
         <div className={styles.teamSection}>
             <div className={styles.teamGrid}>
-                {members.map((member) => (
+                {members.map((member, index) => (
                     <div
-                        key={member._id}
-                        className={styles.memberCard}
+                        key={member._id || index}
+                        className={`${styles.memberCard} reveal`}
                     >
-                        <Link href={`/about/team/${member._id}`} className={styles.cardLink}>
-                            <div className={styles.imageContainer}>
-                                <img
-                                    src={member.image}
-                                    alt={member.name}
-                                    className={styles.memberImage}
-                                />
-                                <div className={styles.imageOverlay}>
-                                    <span className={styles.viewProfile}>View Profile</span>
+                        {member._id ? (
+                            <Link href={`/about/team/${member._id}`} className={styles.cardLink}>
+                                <div className={styles.imageContainer}>
+                                    <img
+                                        src={member.image || "https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=1000&auto=format&fit=crop"}
+                                        alt={member.name}
+                                        className={styles.memberImage}
+                                    />
+                                    <div className={styles.imageOverlay}>
+                                        <span className={styles.viewProfile}>View Profile</span>
+                                    </div>
+                                </div>
+
+                                <div className={styles.memberInfo}>
+                                    <h3 className={styles.memberName}>{member.name}</h3>
+                                    <p className={styles.memberRole}>{member.role}</p>
+                                </div>
+                            </Link>
+                        ) : (
+                            <div className={styles.cardLink}>
+                                <div className={styles.imageContainer}>
+                                    <img
+                                        src={member.image || "https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=1000&auto=format&fit=crop"}
+                                        alt={member.name}
+                                        className={styles.memberImage}
+                                    />
+                                </div>
+
+                                <div className={styles.memberInfo}>
+                                    <h3 className={styles.memberName}>{member.name}</h3>
+                                    <p className={styles.memberRole}>{member.role}</p>
                                 </div>
                             </div>
-
-                            <div className={styles.memberInfo}>
-                                <h3 className={styles.memberName}>{member.name}</h3>
-                                <p className={styles.memberRole}>{member.role}</p>
-                               
-                            </div>
-                        </Link>
+                        )}
                     </div>
                 ))}
             </div>

@@ -4,83 +4,84 @@ import styles from "./page.module.css";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import HeroSlider from "@/components/HeroSlider";
 import StatsSection from "@/components/StatsSection";
-
 import ScrollReveal from "@/components/ScrollReveal";
 
 export default function Home() {
   return (
     <main>
       <ScrollReveal />
+
       {/* Hero Section */}
       <section className={styles.hero}>
         <HeroSlider />
-        <div style={{ position: 'relative', zIndex: 2 }}>
+        <div className={styles.heroContent}>
           <h1 className="reveal">Designing Spaces That Inspire</h1>
           <p className="reveal">
             We create modern, sustainable, and timeless architectural designs tailored to your vision.
           </p>
-          <div style={{ display: 'flex', gap: '1rem' }}>
+          <div className={`${styles.heroButtons} reveal`}>
             <Link href="/projects" className="btn">
               View Our Work
             </Link>
-            <Link href="/contact" className="btn-outline" style={{ color: '#fff', borderColor: '#fff', fontSize: 15 }}>
+            <Link href="/contact" className="btn-outline" style={{ color: '#fff', borderColor: '#fff' }}>
               Contact Us
             </Link>
           </div>
         </div>
-
-
       </section>
 
       {/* Intro Section */}
       <section className="section container">
         <div className={styles.intro}>
-          <h2 className="intro-h2">Welcome to varsha and pradeep architects</h2>
-          <p>“Our corporate office in Chennai stands testimony to your ability to convert our abstract ideas on transparency, space, elegance, simplicity, innovation, contemporariness, and green into something graceful, functional, and different.”
+          <h2 className="reveal">Welcome to varsha and pradeep architects</h2>
+          <p className="reveal">
+            “Our corporate office in Chennai stands testimony to your ability to convert our abstract ideas on transparency, space, elegance, simplicity, innovation, contemporariness, and green into something graceful, functional, and different.”
           </p>
-          <Link href="/about" className="btn-outline">
+          <Link href="/about" className="btn-outline reveal">
             Learn More About Us
           </Link>
         </div>
       </section>
 
       {/* Services Section */}
-      <section className="section container" style={{ backgroundColor: 'var(--secondary)', borderRadius: 'var(--radius-lg)' }}>
-        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-          <h2>Our Services</h2>
-          <p>Comprehensive architectural solutions for every scale.</p>
-        </div>
-        <div className={styles.servicesGrid}>
-          <div className={styles.serviceCard}>
-            <div className={styles.serviceIcon}>🏛️</div>
-            <h3>Architectural Design</h3>
-            <p>From concept to construction, we deliver innovative design solutions that balance aesthetics with functionality.</p>
+      <section className="section" style={{ backgroundColor: 'var(--secondary)' }}>
+        <div className="container">
+          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+            <h2 className="reveal">Our Services</h2>
+            <p className="reveal">Comprehensive architectural solutions for every scale.</p>
           </div>
-          <div className={styles.serviceCard}>
-            <div className={styles.serviceIcon}>🛋️</div>
-            <h3>Interior Design</h3>
-            <p>Creating cohesive and beautiful interiors that complement the architectural form and enhance user experience.</p>
-          </div>
-          <div className={styles.serviceCard}>
-            <div className={styles.serviceIcon}>🏙️</div>
-            <h3>Urban Planning</h3>
-            <p>Sustainable master planning for communities and large-scale developments that prioritize connectivity and livability.</p>
+          <div className={`${styles.servicesGrid} stagger-container`}>
+            <div className={styles.serviceCard}>
+              <div className={styles.serviceIcon}>🏛️</div>
+              <h3>Architectural Design</h3>
+              <p>From concept to construction, we deliver innovative design solutions that balance aesthetics with functionality.</p>
+            </div>
+            <div className={styles.serviceCard}>
+              <div className={styles.serviceIcon}>🛋️</div>
+              <h3>Interior Design</h3>
+              <p>Creating cohesive and beautiful interiors that complement the architectural form and enhance user experience.</p>
+            </div>
+            <div className={styles.serviceCard}>
+              <div className={styles.serviceIcon}>🏙️</div>
+              <h3>Urban Planning</h3>
+              <p>Sustainable master planning for communities and large-scale developments that prioritize connectivity and livability.</p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Featured Projects Section */}
       <section className="section container">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end', marginBottom: '2rem' }}>
+        <div className={styles.projectsHeader}>
           <div>
-            <h2 style={{ textAlign: 'center' }}>Featured Projects</h2>
-            <p style={{ marginBottom: 0 }}>Our Projects</p>
+            <h2 className="reveal-left">Featured Projects</h2>
+            <p className="reveal-left" style={{ marginBottom: 0 }}>Discover our latest architectural achievements.</p>
           </div>
-          <Link href="/projects" className={`btn-outline ${styles.viewAllBtn}`}>
-            View All
+          <Link href="/projects" className="btn-outline reveal-right">
+            View All Projects
           </Link>
         </div>
-        <div className={styles.projectsGrid}>
+
+        <div className={`${styles.projectsGrid} stagger-container`}>
           {/* Project 1 */}
           <div className={styles.projectCard}>
             <img
@@ -89,8 +90,8 @@ export default function Home() {
               className={styles.projectImage}
             />
             <div className={styles.projectOverlay}>
-              <h3>Modern Residence</h3>
               <p>Residential</p>
+              <h3>Modern Residence</h3>
             </div>
           </div>
           {/* Project 2 */}
@@ -101,8 +102,8 @@ export default function Home() {
               className={styles.projectImage}
             />
             <div className={styles.projectOverlay}>
-              <h3>Corporate HQ</h3>
               <p>Commercial</p>
+              <h3>Corporate HQ</h3>
             </div>
           </div>
           {/* Project 3 */}
@@ -113,37 +114,37 @@ export default function Home() {
               className={styles.projectImage}
             />
             <div className={styles.projectOverlay}>
-              <h3>Urban Loft</h3>
               <p>Interior</p>
+              <h3>Urban Loft</h3>
             </div>
           </div>
-        </div>
-        <div style={{ textAlign: 'center', marginTop: '3rem' }}>
-          <Link href="/projects" className="btn-outline">
-            View All Projects
-          </Link>
         </div>
       </section>
 
       {/* Stats Section */}
-      <StatsSection />
+      <div className="reveal">
+        <StatsSection />
+      </div>
 
       {/* Testimonials Section */}
-      <div id="testimonials">
+      <div id="testimonials" className="reveal">
         <TestimonialsSection />
       </div>
 
       {/* CTA Section */}
-      <section className={`section ${styles.ctaSection}`}>
+      <section className={styles.ctaSection}>
         <div className="container">
-          <h2>Ready to Start Your Project?</h2>
-          <p style={{ marginBottom: '2rem', maxWidth: '600px', margin: '0 auto 2rem auto' }}>Let's discuss your vision and how we can bring it to life. Schedule a consultation with our expert team today.</p>
-          <Link href="/contact" className="btn">
-            Get a Free Consultation
-          </Link>
+          <h2 className="reveal">Ready to Start Your Project?</h2>
+          <p className="reveal">Let's discuss your vision and how we can bring it to life. Schedule a consultation with our expert team today.</p>
+          <div className="reveal">
+            <Link href="/contact" className="btn">
+              Get a Free Consultation
+            </Link>
+          </div>
         </div>
       </section>
     </main>
-
   );
 }
+
+

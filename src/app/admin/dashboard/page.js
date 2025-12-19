@@ -1,7 +1,7 @@
 "use client";
 
 import { useSession, signOut } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 import { useEffect } from "react";
 
@@ -10,6 +10,7 @@ import styles from "../admin.module.css";
 export default function Dashboard() {
     const { data: session, status } = useSession();
     const router = useRouter();
+    const pathname = usePathname();
 
     useEffect(() => {
         if (status === "unauthenticated") {
@@ -18,30 +19,47 @@ export default function Dashboard() {
     }, [status, router]);
 
     if (status === "loading") {
-        return <p>Loading...</p>;
+        return (
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+                <p>Loading Dashboard...</p>
+            </div>
+        );
     }
+
+    const navItems = [
+        { name: "Dashboard", path: "/admin/dashboard", icon: "📊" },
+        { name: "Manage Team", path: "/admin/team", icon: "👥" },
+        { name: "Manage Projects", path: "/admin/projects", icon: "🏗️" },
+        { name: "Manage Services", path: "/admin/services", icon: "⚙️" },
+        { name: "Manage Testimonials", path: "/admin/testimonials", icon: "💬" },
+        { name: "Manage Careers", path: "/admin/careers", icon: "💼" },
+        { name: "Messages", path: "/admin/messages", icon: "📬" },
+        { name: "Site Settings", path: "/admin/settings", icon: "🛠️" },
+    ];
 
     return (
         <div className={styles.container}>
             {/* Sidebar */}
             <aside className={styles.sidebar}>
-                <h2 style={{ marginBottom: '2rem' }}>Admin Panel</h2>
+                <h2>Admin Panel</h2>
                 <nav>
-                    <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                        <li><Link href="/admin/dashboard" style={{ color: '#fff', textDecoration: 'none' }}>Dashboard</Link></li>
-                        <li><Link href="/admin/team" style={{ color: '#ccc', textDecoration: 'none' }}>Manage Team</Link></li>
-                        <li><Link href="/admin/projects" style={{ color: '#ccc', textDecoration: 'none' }}>Manage Projects</Link></li>
-                        <li><Link href="/admin/services" style={{ color: '#ccc', textDecoration: 'none' }}>Manage Services</Link></li>
-                        <li><Link href="/admin/blog" style={{ color: '#ccc', textDecoration: 'none' }}>Manage Blog</Link></li>
-                        <li><Link href="/admin/testimonials" style={{ color: '#ccc', textDecoration: 'none' }}>Manage Testimonials</Link></li>
-                        <li><Link href="/admin/careers" style={{ color: '#ccc', textDecoration: 'none' }}>Manage Careers</Link></li>
-                        <li><Link href="/admin/messages" style={{ color: '#ccc', textDecoration: 'none' }}>Messages</Link></li>
-                        <li><Link href="/admin/settings" style={{ color: '#ccc', textDecoration: 'none' }}>Site Settings</Link></li>
+                    <ul>
+                        {navItems.map((item) => (
+                            <li key={item.path}>
+                                <Link
+                                    href={item.path}
+                                    className={pathname === item.path ? styles.active : ""}
+                                >
+                                    <span style={{ marginRight: '10px' }}>{item.icon}</span>
+                                    {item.name}
+                                </Link>
+                            </li>
+                        ))}
                     </ul>
                 </nav>
                 <button
                     onClick={() => signOut({ callbackUrl: "/admin/login" })}
-                    style={{ marginTop: 'auto', padding: '0.5rem 1rem', backgroundColor: 'transparent', border: '1px solid #fff', color: '#fff', cursor: 'pointer', borderRadius: '4px', width: '100%', marginTop: '2rem' }}
+                    className={styles.logoutBtn}
                 >
                     Logout
                 </button>
@@ -49,59 +67,20 @@ export default function Dashboard() {
 
             {/* Main Content */}
             <main className={styles.main}>
-                <h1>Welcome, {session?.user?.email}</h1>
-                <p style={{ marginBottom: '2rem' }}>Manage your website content from the options below.</p>
+                <h1>Welcome, {session?.user?.email?.split('@')[0]}</h1>
+                <p>Manage your website content and monitor activity from your dashboard.</p>
 
                 <div className={styles.grid}>
-                    <Link href="/admin/team" style={{ padding: '2rem', backgroundColor: 'white', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', textAlign: 'center', transition: 'transform 0.3s' }}>
-                        <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>👥</div>
-                        <h3 style={{ marginBottom: '0.5rem' }}>Team</h3>
-                        <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Manage team members</p>
-                    </Link>
-
-                    <Link href="/admin/projects" style={{ padding: '2rem', backgroundColor: 'white', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', textAlign: 'center', transition: 'transform 0.3s' }}>
-                        <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🏗️</div>
-                        <h3 style={{ marginBottom: '0.5rem' }}>Projects</h3>
-                        <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Manage projects</p>
-                    </Link>
-
-                    <Link href="/admin/services" style={{ padding: '2rem', backgroundColor: 'white', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', textAlign: 'center', transition: 'transform 0.3s' }}>
-                        <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>⚙️</div>
-                        <h3 style={{ marginBottom: '0.5rem' }}>Services</h3>
-                        <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Manage services</p>
-                    </Link>
-
-                    <Link href="/admin/careers" style={{ padding: '2rem', backgroundColor: 'white', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', textAlign: 'center', transition: 'transform 0.3s' }}>
-                        <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>💼</div>
-                        <h3 style={{ marginBottom: '0.5rem' }}>Careers</h3>
-                        <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Manage applications</p>
-                    </Link>
-
-                    <Link href="/admin/blog" style={{ padding: '2rem', backgroundColor: 'white', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', textAlign: 'center', transition: 'transform 0.3s' }}>
-                        <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>📝</div>
-                        <h3 style={{ marginBottom: '0.5rem' }}>Blog</h3>
-                        <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Manage blog posts</p>
-                    </Link>
-
-                    <Link href="/admin/testimonials" style={{ padding: '2rem', backgroundColor: 'white', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', textAlign: 'center', transition: 'transform 0.3s' }}>
-                        <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>💬</div>
-                        <h3 style={{ marginBottom: '0.5rem' }}>Testimonials</h3>
-                        <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Manage client reviews</p>
-                    </Link>
-
-                    <Link href="/admin/settings" style={{ padding: '2rem', backgroundColor: 'white', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', textAlign: 'center', transition: 'transform 0.3s' }}>
-                        <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>⚙️</div>
-                        <h3 style={{ marginBottom: '0.5rem' }}>Settings</h3>
-                        <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Contact info & Socials</p>
-                    </Link>
-
-                    <Link href="/admin/messages" style={{ padding: '2rem', backgroundColor: 'white', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', textAlign: 'center', transition: 'transform 0.3s' }}>
-                        <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>📬</div>
-                        <h3 style={{ marginBottom: '0.5rem' }}>Messages</h3>
-                        <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>View contact messages</p>
-                    </Link>
+                    {navItems.slice(1).map((item) => (
+                        <Link href={item.path} key={item.path} className={styles.card}>
+                            <div className={styles.cardIcon}>{item.icon}</div>
+                            <h3>{item.name.replace('Manage ', '')}</h3>
+                            <p>Click to manage {item.name.toLowerCase().replace('manage ', '')}</p>
+                        </Link>
+                    ))}
                 </div>
             </main>
         </div>
     );
 }
+
