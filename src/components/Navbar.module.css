@@ -1,0 +1,316 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: transparent;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+    border-bottom: 1px solid transparent;
+    padding: 2.5rem 0;
+    transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.progressBar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-light));
+    z-index: 1001;
+    transition: width 0.2s ease;
+}
+
+.header.scrolled {
+    padding: 1.25rem 0;
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.03);
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.4rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    color: var(--foreground);
+    text-transform: uppercase;
+    font-family: var(--font-dm-sans), sans-serif;
+    position: relative;
+    transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 1002;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    display: inline-block;
+    transition: transform 0.5s ease;
+}
+
+.logo:hover::before {
+    transform: rotate(45deg) scale(1.2);
+}
+
+.header:not(.scrolled) .logo {
+    color: #ffffff;
+}
+
+.logo:hover {
+    letter-spacing: 0.15em;
+}
+
+.links {
+    display: flex;
+    gap: 4rem;
+    list-style: none;
+    align-items: center;
+}
+
+.link {
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--foreground);
+    position: relative;
+    padding: 0.5rem 0;
+    opacity: 0.5;
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.header:not(.scrolled) .link {
+    color: #ffffff;
+    opacity: 0.7;
+}
+
+.link:hover {
+    opacity: 1;
+    color: var(--accent);
+    transform: translateY(-1px);
+}
+
+.link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    width: 4px;
+    height: 4px;
+    background-color: var(--accent);
+    border-radius: 50%;
+    transform: translateX(-50%) scale(0);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.link:hover::after {
+    transform: translateX(-50%) scale(1);
+}
+
+.cta {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem 2rem;
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    border-radius: 44px;
+    background-color: var(--primary);
+    color: #fff;
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    height: 44px;
+    min-width: 170px;
+    perspective: 500px;left: 8;
+    border: 1px solid var(--primary);
+}
+
+/* Shimmer Effect */
+.cta::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(to bottom right,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0) 40%,
+            rgba(255, 255, 255, 0.2) 50%,
+            rgba(255, 255, 255, 0) 60%,
+            rgba(255, 255, 255, 0) 100%);
+    transform: rotate(45deg);
+    animation: shimmer 4s infinite;
+    z-index: 2;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-150%) rotate(45deg);
+    }
+
+    100% {
+        transform: translateX(150%) rotate(45deg);
+    }
+}
+
+
+
+@keyframes architecturalRoll {
+
+    0%,
+    15%,
+    85%,
+    100% {
+        transform: rotateX(0deg);
+    }
+
+    25%,
+    75% {
+        transform: rotateX(90deg) translateY(-50%);
+    }
+}
+
+/* Hover State */
+.cta:hover {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: var(--primary);
+    box-shadow: 0 15px 30px rgba(197, 160, 89, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Clicked State - Change to Black */
+.cta:active {
+    background-color: #000000 !important;
+    border-color: #000000 !important;
+    color: #ffffff !important;
+    transform: translateY(0) scale(0.98);
+}
+
+/* Over Black/Dark Background (Not Scrolled) */
+.header:not(.scrolled) .cta {
+    background-color: #ffffff;
+    color: var(--primary);
+    border-color: #ffffff;
+}
+
+.header:not(.scrolled) .cta:hover {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: var(--primary);
+}
+
+.header:not(.scrolled) .cta:active {
+    background-color: #000000 !important;
+    border-color: #000000 !important;
+    color: #ffffff !important;
+}
+
+.mobileMenuBtn {
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 1001;
+    position: relative;
+}
+
+.bar {
+    display: block;
+    width: 28px;
+    height: 1px;
+    margin: 8px auto;
+    transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    background-color: var(--foreground);
+}
+
+.header:not(.scrolled) .bar {
+    background-color: #ffffff;
+}
+
+@media (max-width: 1024px) {
+    .links {
+        gap: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .mobileMenuBtn {
+        display: block;
+    }
+
+    .links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 100%;
+        height: 100vh;
+        background-color: #020617;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+        z-index: 1000;
+        padding: 2rem;
+        gap: 3rem;
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .links.open {
+        right: 0;
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .link {
+        font-size: 1.25rem;
+        font-weight: 900;
+        color: #ffffff !important;
+        letter-spacing: 0.3em;
+    }
+
+    .cta {
+        margin-top: 3rem;
+    }
+
+    .logo {
+        font-size: 1.1rem;
+    }
+
+    .active .bar {
+        background-color: #ffffff !important;
+    }
+
+    .active .bar:nth-child(2) {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+
+    .active .bar:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
+    }
+
+    .active .bar:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
+    }
+}

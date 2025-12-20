@@ -1,0 +1,299 @@
+.sliderContainer {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 2rem 0 6rem;
+}
+
+.sliderTrack {
+    display: flex;
+    transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.slide {
+    flex: 0 0 100%;
+    padding: 0 5%;
+    display: flex;
+    justify-content: center;
+    transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.slide.activeSlide {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.card {
+    width: 100%;
+    max-width: 1200px;
+    background-color: #ffffff;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 0;
+    align-items: stretch;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.03);
+    min-height: 500px;
+}
+
+.visualSide {
+    background-color: #f8fafc;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem;
+    overflow: hidden;
+}
+
+.serviceNum {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    font-size: 8rem;
+    font-weight: 900;
+    color: rgba(0, 0, 0, 0.03);
+    font-family: var(--font-inter), sans-serif;
+    line-height: 1;
+}
+
+.iconWrapper {
+    width: 180px;
+    height: 180px;
+    background: #ffffff;
+    border: 1px solid rgba(197, 160, 89, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.02);
+}
+
+.icon {
+    font-size: 6rem;
+    transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.decorativeLine {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    height: 100px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    transform: translateX(-50%);
+}
+
+.contentSide {
+    padding: 6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+}
+
+.categoryBadge {
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.categoryBadge::before {
+    content: '';
+    width: 30px;
+    height: 1px;
+    background: var(--accent);
+}
+
+.title {
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    font-weight: 900;
+    margin-bottom: 2rem;
+    color: var(--primary);
+    font-family: var(--font-inter), sans-serif;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+}
+
+.description {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+    margin-bottom: 4rem;
+    font-family: var(--font-playfair), serif;
+    max-width: 600px;
+}
+
+.cardFooter {
+    display: flex;
+    align-items: center;
+}
+
+.learnMore {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    font-weight: 800;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--primary);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+}
+
+.arrow {
+    transition: transform 0.3s ease;
+}
+
+.learnMore:hover {
+    color: var(--accent);
+}
+
+.learnMore:hover .arrow {
+    transform: translateX(10px);
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 4rem auto 0;
+    padding: 0 2rem;
+}
+
+.navBtn {
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    color: var(--primary);
+    transition: all 0.3s ease;
+    padding: 1rem;
+}
+
+.btnText {
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.85rem;
+}
+
+.btnIcon {
+    width: 50px;
+    height: 50px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.navBtn:hover .btnIcon {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+    transform: scale(1.1);
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex: 1;
+    max-width: 400px;
+}
+
+.currentNum,
+.totalNum {
+    font-weight: 900;
+    font-family: var(--font-inter), sans-serif;
+    font-size: 0.9rem;
+    color: var(--primary);
+}
+
+.progressTrack {
+    flex: 1;
+    height: 2px;
+    background: rgba(0, 0, 0, 0.05);
+    position: relative;
+}
+
+.progressBar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: var(--accent);
+    transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (max-width: 1024px) {
+    .card {
+        grid-template-columns: 1fr;
+    }
+
+    .contentSide {
+        padding: 4rem 3rem;
+        text-align: center;
+        align-items: center;
+    }
+
+    .categoryBadge {
+        justify-content: center;
+    }
+
+    .description {
+        margin: 0 auto 3rem;
+    }
+
+    .cardFooter {
+        justify-content: center;
+    }
+
+    .visualSide {
+        padding: 3rem;
+    }
+
+    .serviceNum {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .controls {
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    .pagination {
+        width: 100%;
+        order: -1;
+    }
+
+    .navBtn .btnText {
+        display: none;
+    }
+}

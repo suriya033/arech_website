@@ -1,0 +1,155 @@
+.aboutSection {
+    padding: var(--spacing-xl) 0;
+}
+
+.storyGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+}
+
+.storyContent h2 {
+    margin-bottom: 2rem;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+}
+
+.storyContent p {
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    color: var(--foreground);
+}
+
+.lead {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.storyImage {
+    position: relative;
+    height: 500px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+}
+
+.storyImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.philosophySection {
+    background-color: var(--secondary);
+    padding: var(--spacing-xl) 0;
+}
+
+.philosophyContent {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.philosophyContent h2 {
+    margin-bottom: 3rem;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+}
+
+.philosophyCard {
+    padding: 4rem;
+    background: white;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border);
+}
+
+.quote {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-style: italic;
+    color: var(--primary);
+    margin-bottom: 2rem;
+    line-height: 1.4;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+.philosophyText {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+}
+
+.teamHeader {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.teamHeader h2 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+}
+
+.teamHeader p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+}
+
+@media (max-width: 1024px) {
+    .storyGrid {
+        gap: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .aboutSection {
+        padding: 4rem 0;
+    }
+
+    .storyGrid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .storyContent h2 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .storyContent p {
+        font-size: 1.05rem;
+        line-height: 1.7;
+    }
+
+    .storyImage {
+        height: 300px;
+        order: -1;
+        /* Image first on mobile */
+    }
+
+    .philosophySection {
+        padding: 4rem 0;
+    }
+
+    .philosophyCard {
+        padding: 2.5rem 1.5rem;
+    }
+
+    .quote {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .philosophyText {
+        font-size: 1rem;
+    }
+
+    .teamHeader {
+        margin-bottom: 2.5rem;
+    }
+}

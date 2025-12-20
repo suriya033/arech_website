@@ -1,0 +1,117 @@
+.servicesSection {
+    padding: var(--spacing-xl) 0;
+    background-color: #fcfcfc;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle architectural grid background */
+.servicesSection::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+    background-size: 100px 100px;
+    pointer-events: none;
+}
+
+.sectionHeader {
+    text-align: center;
+    margin-bottom: 8rem;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    z-index: 1;
+}
+
+.sectionHeader h2 {
+    font-size: clamp(3rem, 6vw, 5rem);
+    margin-bottom: 2rem;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    color: var(--primary);
+    font-family: var(--font-inter), sans-serif;
+}
+
+.sectionHeader p {
+    font-size: 1.4rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+    font-family: var(--font-playfair), serif;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.noData {
+    text-align: center;
+    padding: 8rem;
+    background: white;
+    border: 1px solid var(--border);
+    position: relative;
+    z-index: 1;
+}
+
+.processSection {
+    background-color: var(--primary);
+    color: white;
+    padding: var(--spacing-xl) 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.processSection::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.processHeader {
+    text-align: center;
+    margin-bottom: 8rem;
+    position: relative;
+    z-index: 1;
+}
+
+.processHeader h2 {
+    color: white;
+    font-size: clamp(3rem, 6vw, 4.5rem);
+    margin-bottom: 2rem;
+    font-family: var(--font-inter), sans-serif;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+}
+
+.processHeader p {
+    color: rgba(255, 255, 255, 0.6);
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 1.4rem;
+    font-family: var(--font-playfair), serif;
+    line-height: 1.8;
+}
+
+@media (max-width: 768px) {
+    .servicesSection {
+        padding: 6rem 0;
+    }
+
+    .sectionHeader {
+        margin-bottom: 4rem;
+    }
+
+    .processSection {
+        padding: 6rem 0;
+    }
+
+    .processHeader {
+        margin-bottom: 4rem;
+    }
+}

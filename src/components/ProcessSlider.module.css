@@ -1,0 +1,242 @@
+.container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8rem;
+    position: relative;
+    padding: 0 4rem;
+}
+
+.navigation::before {
+    content: '';
+    position: absolute;
+    top: 30px;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: 0;
+}
+
+.navItem {
+    background: transparent;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    cursor: pointer;
+    z-index: 1;
+    transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    width: 160px;
+}
+
+.stepNum {
+    width: 60px;
+    height: 60px;
+    background: var(--primary);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.4);
+    transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    font-size: 1.1rem;
+}
+
+.stepTitle {
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: rgba(255, 255, 255, 0.4);
+    transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.navItem.active .stepNum {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--primary);
+    transform: scale(1.25);
+    box-shadow: 0 0 40px rgba(197, 160, 89, 0.3);
+}
+
+.navItem.active .stepTitle {
+    color: var(--accent);
+    transform: translateY(10px);
+}
+
+.contentWrapper {
+    position: relative;
+    height: 500px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    overflow: hidden;
+}
+
+.slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.95) translateY(30px);
+    transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+    padding: 6rem;
+}
+
+.slide.active {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1) translateY(0);
+}
+
+.slideInner {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 6rem;
+    align-items: center;
+    height: 100%;
+}
+
+.iconBox {
+    font-size: 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    filter: drop-shadow(0 30px 50px rgba(0, 0, 0, 0.4));
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-30px) rotate(5deg);
+    }
+}
+
+.textBox h3 {
+    font-size: 4rem;
+    font-weight: 900;
+    margin-bottom: 2.5rem;
+    font-family: var(--font-inter), sans-serif;
+    color: white;
+    letter-spacing: -0.02em;
+}
+
+.textBox p {
+    font-size: 1.4rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 4rem;
+    font-family: var(--font-playfair), serif;
+}
+
+.stepIndicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.5rem;
+    color: var(--accent);
+    font-weight: 800;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+}
+
+.stepIndicator::before {
+    content: '';
+    width: 50px;
+    height: 1px;
+    background: var(--accent);
+}
+
+.mobileControls {
+    display: none;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.mobileControls button {
+    padding: 1rem 2.5rem;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mobileControls button:not(:disabled):hover {
+    background: var(--accent);
+    color: var(--primary);
+    border-color: var(--accent);
+}
+
+.mobileControls button:disabled {
+    opacity: 0.2;
+    cursor: not-allowed;
+}
+
+@media (max-width: 1024px) {
+    .navigation {
+        padding: 0 2rem;
+        margin-bottom: 5rem;
+    }
+
+    .navItem {
+        width: 100px;
+    }
+
+    .slideInner {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 3rem;
+    }
+
+    .iconBox {
+        font-size: 6rem;
+    }
+
+    .textBox h3 {
+        font-size: 2.5rem;
+    }
+
+    .contentWrapper {
+        height: auto;
+        min-height: 600px;
+    }
+
+    .slide {
+        padding: 4rem 2rem;
+    }
+
+    .stepIndicator {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .navigation {
+        display: none;
+    }
+
+    .mobileControls {
+        display: flex;
+    }
+}

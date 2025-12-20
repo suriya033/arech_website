@@ -1,0 +1,130 @@
+.contactSection {
+    padding: var(--spacing-xl) 0;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+}
+
+.infoContent h2 {
+    margin-bottom: 2rem;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-family: var(--font-inter), sans-serif;
+    font-weight: 900;
+    line-height: 1.1;
+}
+
+.lead {
+    margin-bottom: 3.5rem;
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    font-family: var(--font-playfair), serif;
+}
+
+.infoGrid {
+    display: grid;
+    gap: 2.5rem;
+}
+
+.infoCard {
+    padding: 3rem;
+    background: var(--background);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.infoCard::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--accent);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.5s ease;
+}
+
+.infoCard:hover {
+    transform: translateX(10px);
+    border-color: var(--accent);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+}
+
+.infoCard:hover::before {
+    transform: scaleY(1);
+}
+
+.infoCard h3 {
+    font-size: 1.1rem;
+    margin-bottom: 1.25rem;
+    color: var(--accent);
+    font-family: var(--font-inter), sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.infoCard p {
+    color: var(--foreground);
+    font-weight: 500;
+    line-height: 1.8;
+    font-size: 1.1rem;
+}
+
+.mapSection {
+    padding: var(--spacing-lg) 0 var(--spacing-xl);
+}
+
+.mapContainer {
+    height: 650px;
+    width: 100%;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border);
+    position: relative;
+}
+
+@media (max-width: 1024px) {
+    .grid {
+        gap: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .contactSection {
+        padding: var(--spacing-lg) 0;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+    }
+
+    .infoCard {
+        padding: 2.5rem 2rem;
+    }
+
+    .infoCard:hover {
+        transform: translateY(-5px);
+    }
+
+    .mapSection {
+        padding: var(--spacing-md) 0 var(--spacing-lg);
+    }
+
+    .mapContainer {
+        height: 450px;
+    }
+}
