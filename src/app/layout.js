@@ -1,11 +1,24 @@
-import { Inter } from "next/font/google";
+import { Playfair_Display, Lato, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CustomCursor from "@/components/CustomCursor";
 
-const inter = Inter({
+const playfair = Playfair_Display({
   subsets: ["latin"],
+  variable: "--font-playfair",
+});
+
+const lato = Lato({
+  subsets: ["latin"],
+  weight: ["300", "400", "700", "900"],
+  variable: "--font-lato",
+});
+
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-cormorant",
 });
 
 export const metadata = {
@@ -21,8 +34,8 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" data-scroll-behavior="smooth">
-      <body className={inter.className}>
+    <html lang="en">
+      <body className={`${lato.variable} ${playfair.variable} ${cormorant.variable}`}>
         <CustomCursor />
         <Navbar />
         {children}
