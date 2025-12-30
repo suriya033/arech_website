@@ -4,6 +4,7 @@ import styles from "./page.module.css";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import HeroSlider from "@/components/HeroSlider";
 import StatsSection from "@/components/StatsSection";
+import TeamListClient from "@/components/Team/TeamListClient";
 
 export default function Home() {
   return (
@@ -35,9 +36,6 @@ export default function Home() {
           <p className="reveal">
             &ldquo;Our corporate office in Chennai stands testimony to your ability to convert our abstract ideas on transparency, space, elegance, simplicity, innovation, contemporariness, and green into something graceful, functional, and different.&rdquo;
           </p>
-          <Link href="/about" className="btn-outline reveal">
-            Learn More About Us
-          </Link>
         </div>
       </section>
 
@@ -45,7 +43,7 @@ export default function Home() {
       <section className="section" style={{ backgroundColor: 'var(--background)', overflow: 'hidden' }}>
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
-            <h2 className="reveal-blur">Our Design Process</h2>
+            <h2 className="reveal-blur" style={{textDecoration:'underline',textDecorationColor:'#ffd700'}}>Our Design Process</h2>
             <p className="reveal">A systematic approach to bringing your vision to life.</p>
           </div>
           <div className={styles.processGrid}>
@@ -73,101 +71,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Services Section */}
-      <section className="section" style={{ backgroundColor: 'var(--secondary)' }}>
-        <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <h2 className="reveal-skew">Our Services</h2>
-            <p className="reveal">Comprehensive architectural solutions for every scale.</p>
-          </div>
-          <div className={`${styles.servicesGrid} stagger-container`}>
-            <div className={`${styles.serviceCard} tilt-3d`}>
-              <div className={styles.serviceIcon}>🏛️</div>
-              <h3>Architectural Design</h3>
-              <p>From concept to construction, we deliver innovative design solutions that balance aesthetics with functionality.</p>
-            </div>
-            <div className={`${styles.serviceCard} tilt-3d`}>
-              <div className={styles.serviceIcon}>🛋️</div>
-              <h3>Interior Design</h3>
-              <p>Creating cohesive and beautiful interiors that complement the architectural form and enhance user experience.</p>
-            </div>
-            <div className={`${styles.serviceCard} tilt-3d`}>
-              <div className={styles.serviceIcon}>🏙️</div>
-              <h3>Urban Planning</h3>
-              <p>Sustainable master planning for communities and large-scale developments that prioritize connectivity and livability.</p>
-            </div>
-          </div>
+      {/* Meet the Team Section */}
+      <section className="section container" style={{backgroundColor:'black'}}>
+        <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+          <h2 className="reveal-blur" style={{color:'white',textDecoration:'underline',textDecorationColor:'#ffd700'}}>Meet the Team</h2>
+          <p className="reveal"style={{color:'whitesmoke'}}>The creative minds behind our exceptional designs.</p>
         </div>
-      </section>
-
-      {/* Featured Projects */}
-      <section className="section container">
-        <div className={styles.projectsHeader}>
-          <div>
-            <h2 className="reveal-blur">Featured Projects</h2>
-            <p className="reveal" style={{ marginBottom: 0 }}>Discover our latest architectural achievements.</p>
-          </div>
-          <Link href="/projects" className="btn-outline reveal">
-            View All Projects
-          </Link>
-        </div>
-
-        <div className={`${styles.projectsGrid} stagger-container`}>
-          {/* Project 1 */}
-          <div className={`${styles.projectCard} tilt-3d`}>
-            <Image
-              src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop"
-              alt="Modern Residence"
-              fill
-              className={styles.projectImage}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            />
-            <div className={styles.projectOverlay}>
-              <span className={styles.projectCategory}>Residential</span>
-              <h3>Modern Residence</h3>
-              <p className={styles.projectLocation}></p>
-              <div className={styles.viewProjectBtn}>
-                View Project <span />
-              </div>
-            </div>
-          </div>
-          {/* Project 2 */}
-          <div className={`${styles.projectCard} tilt-3d`}>
-            <Image
-              src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop"
-              alt="Corporate HQ"
-              fill
-              className={styles.projectImage}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            />
-            <div className={styles.projectOverlay}>
-              <span className={styles.projectCategory}>Commercial</span>
-              <h3>Corporate HQ</h3>
-              <p className={styles.projectLocation}></p>
-              <div className={styles.viewProjectBtn}>
-                View Project <span />
-              </div>
-            </div>
-          </div>
-          {/* Project 3 */}
-          <div className={`${styles.projectCard} tilt-3d`}>
-            <Image
-              src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2053&auto=format&fit=crop"
-              alt="Urban Loft"
-              fill
-              className={styles.projectImage}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            />
-            <div className={styles.projectOverlay}>
-              <span className={styles.projectCategory}>Interior</span>
-              <h3>Urban Loft</h3>
-              <p className={styles.projectLocation}></p>
-              <div className={styles.viewProjectBtn}>
-                View Project <span />
-              </div>
-            </div>
-          </div>
-        </div>
+        <TeamListClient />
       </section>
 
       {/* Stats Section */}

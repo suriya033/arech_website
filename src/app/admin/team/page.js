@@ -39,9 +39,15 @@ export default function TeamManagement() {
         try {
             const res = await fetch("/api/team");
             const data = await res.json();
-            setMembers(data);
+            if (Array.isArray(data)) {
+                setMembers(data);
+            } else {
+                console.error("Data is not an array:", data);
+                setMembers([]);
+            }
         } catch (error) {
             console.error("Failed to fetch members:", error);
+            setMembers([]);
         } finally {
             setLoading(false);
         }
@@ -241,7 +247,7 @@ export default function TeamManagement() {
                 </div>
 
                 <div className={styles.projectGrid}>
-                    {members.map((member) => (
+                    {Array.isArray(members) && members.map((member) => (
                         <div key={member._id} className={styles.projectCard}>
                             <div className={styles.projectImage}>
                                 <Image

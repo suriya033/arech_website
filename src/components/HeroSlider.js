@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import styles from "./HeroSlider.module.css";
 
 const heroImages = [
-    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop",
+    "https://tse3.mm.bing.net/th/id/OIP.kK21l2CyARImgXKSB4r3NAHaE_?pid=Api&h=220&P=0",
     "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2053&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=2070&auto=format&fit=crop"
 ];

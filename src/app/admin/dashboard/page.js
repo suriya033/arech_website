@@ -30,7 +30,6 @@ export default function Dashboard() {
 
     const navItems = [
         { name: "Projects", path: "/admin/projects", icon: "🏗️", desc: "Manage your architectural portfolio" },
-        { name: "Services", path: "/admin/services", icon: "⚙️", desc: "Update your service offerings" },
         { name: "Team", path: "/admin/team", icon: "👥", desc: "Manage your creative team" },
         { name: "Testimonials", path: "/admin/testimonials", icon: "💬", desc: "Manage client feedback" },
         { name: "Careers", path: "/admin/careers", icon: "💼", desc: "Post new job openings" },

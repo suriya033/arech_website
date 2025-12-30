@@ -31,23 +31,23 @@ export default function ImageUpload({ value, onChange, label = "Image" }) {
     };
 
     return (
-        <div style={{ marginBottom: '1.5rem' }}>
-            <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>
+        <div style={{ marginBottom: "1.5rem" }}>
+            <label style={{ display: "block", marginBottom: "0.5rem", fontWeight: "500" }}>
                 {label}
             </label>
 
-            <div style={{ marginBottom: '1rem' }}>
+            <div style={{ marginBottom: "1rem" }}>
                 <button
                     type="button"
                     onClick={() => setUploadMethod("url")}
                     style={{
-                        padding: '0.5rem 1rem',
-                        marginRight: '0.5rem',
-                        backgroundColor: uploadMethod === "url" ? 'var(--primary)' : 'transparent',
-                        color: uploadMethod === "url" ? 'white' : 'var(--primary)',
-                        border: '1px solid var(--primary)',
-                        borderRadius: '4px',
-                        cursor: 'pointer'
+                        padding: "0.5rem 1rem",
+                        marginRight: "0.5rem",
+                        backgroundColor: uploadMethod === "url" ? "var(--primary)" : "transparent",
+                        color: uploadMethod === "url" ? "white" : "var(--primary)",
+                        border: "1px solid var(--primary)",
+                        borderRadius: "4px",
+                        cursor: "pointer"
                     }}
                 >
                     URL
@@ -56,12 +56,12 @@ export default function ImageUpload({ value, onChange, label = "Image" }) {
                     type="button"
                     onClick={() => setUploadMethod("file")}
                     style={{
-                        padding: '0.5rem 1rem',
-                        backgroundColor: uploadMethod === "file" ? 'var(--primary)' : 'transparent',
-                        color: uploadMethod === "file" ? 'white' : 'var(--primary)',
-                        border: '1px solid var(--primary)',
-                        borderRadius: '4px',
-                        cursor: 'pointer'
+                        padding: "0.5rem 1rem",
+                        backgroundColor: uploadMethod === "file" ? "var(--primary)" : "transparent",
+                        color: uploadMethod === "file" ? "white" : "var(--primary)",
+                        border: "1px solid var(--primary)",
+                        borderRadius: "4px",
+                        cursor: "pointer"
                     }}
                 >
                     Upload File
@@ -75,11 +75,11 @@ export default function ImageUpload({ value, onChange, label = "Image" }) {
                     value={value || ""}
                     onChange={handleUrlChange}
                     style={{
-                        width: '100%',
-                        padding: '0.75rem',
-                        border: '1px solid var(--border)',
-                        borderRadius: '4px',
-                        fontSize: '1rem'
+                        width: "100%",
+                        padding: "0.75rem",
+                        border: "1px solid var(--border)",
+                        borderRadius: "4px",
+                        fontSize: "1rem"
                     }}
                 />
             ) : (
@@ -88,27 +88,27 @@ export default function ImageUpload({ value, onChange, label = "Image" }) {
                     accept="image/*"
                     onChange={handleFileChange}
                     style={{
-                        width: '100%',
-                        padding: '0.75rem',
-                        border: '1px solid var(--border)',
-                        borderRadius: '4px',
-                        fontSize: '1rem'
+                        width: "100%",
+                        padding: "0.75rem",
+                        border: "1px solid var(--border)",
+                        borderRadius: "4px",
+                        fontSize: "1rem"
                     }}
                 />
             )}
 
             {preview && (
-                <div style={{ marginTop: '1rem' }}>
-                    <p style={{ fontSize: '0.9rem', marginBottom: '0.5rem', color: 'var(--text-muted)' }}>Preview:</p>
+                <div style={{ marginTop: "1rem" }}>
+                    <p style={{ fontSize: "0.9rem", marginBottom: "0.5rem", color: "var(--text-muted)" }}>Preview:</p>
                     <Image
                         src={preview}
                         alt="Preview"
                         width={200}
                         height={200}
                         style={{
-                            objectFit: 'cover',
-                            borderRadius: '8px',
-                            border: '1px solid var(--border)'
+                            objectFit: "cover",
+                            borderRadius: "8px",
+                            border: "1px solid var(--border)"
                         }}
                         unoptimized
                     />

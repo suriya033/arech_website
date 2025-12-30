@@ -36,7 +36,12 @@ export default function ProjectsGallery() {
         ? projects
         : projects.filter(p => p.category === activeCategory);
 
-    if (loading) return <p>Loading projects...</p>;
+    if (loading) return (
+        <div className={styles.loadingContainer}>
+            <div className={styles.loader}></div>
+            <p>Curating Projects...</p>
+        </div>
+    );
 
 
 
@@ -88,13 +93,15 @@ export default function ProjectsGallery() {
                 ))}
             </div>
 
-            <div className={styles.grid}>
-                {filteredProjects.map(project => (
+            <div className={`${styles.grid} stagger-container`}>
+                {filteredProjects.map((project, index) => (
                     <div
                         key={project._id}
-                        className={`${styles.card} tilt-3d`}
+                        className={`${styles.card} reveal`}
                         onClick={() => openProject(project)}
-                        style={{ cursor: 'pointer' }}
+                        style={{
+                            transitionDelay: `${index * 0.1}s`
+                        }}
                     >
                         <div className={styles.imageContainer}>
                             <Image
@@ -108,9 +115,9 @@ export default function ProjectsGallery() {
                         <div className={styles.content}>
                             <span className={styles.category}>{project.category}</span>
                             <h3 className={styles.title}>{project.title}</h3>
-                            <p className={styles.location}>📍 {project.location}</p>
+                            <p className={styles.location}>{project.location}</p>
                             <div className={styles.viewProjectBtn}>
-                                View Details <span />
+                                Explore Project
                             </div>
                         </div>
                     </div>
@@ -152,7 +159,10 @@ export default function ProjectsGallery() {
                         {/* Project Details */}
                         <div className={styles.projectDetails}>
                             <h2 className={styles.projectTitle}>{selectedProject.title}</h2>
-                            <p className={styles.projectMeta}>{selectedProject.location} • {selectedProject.category}</p>
+                            <div className={styles.projectMeta}>
+                                <span>Location: {selectedProject.location}</span>
+                                <span>Category: {selectedProject.category}</span>
+                            </div>
                             <p className={styles.projectDesc}>{selectedProject.description}</p>
                         </div>
                     </div>

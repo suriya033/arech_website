@@ -82,13 +82,12 @@ async function seed() {
             }
         ];
 
-        const count = await TeamMember.countDocuments();
-        if (count === 0) {
-            await TeamMember.insertMany(teamMembers);
-            console.log('✅ Team members seeded');
-        } else {
-            console.log(`ℹ️  Team members already exist (${count} found)`);
-        }
+        // Clear existing team members
+        await TeamMember.deleteMany({});
+        console.log('🗑️  Cleared existing team members');
+
+        await TeamMember.insertMany(teamMembers);
+        console.log('✅ Team members seeded');
 
         console.log('\n🎉 Seeding completed successfully!');
         console.log('\nYou can now login at: http://localhost:3000/admin/login');

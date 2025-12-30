@@ -1,4 +1,4 @@
-import { Playfair_Display, Lato, Cormorant_Garamond, Inter, Poppins, DM_Sans } from "next/font/google";
+import { Playfair_Display, Lato, Cormorant_Garamond, Inter, Poppins, DM_Sans, Nunito } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -38,6 +38,12 @@ const dmSans = DM_Sans({
   variable: "--font-dm-sans",
 });
 
+const nunito = Nunito({
+  subsets: ["latin"],
+  weight: ["400", "600", "700", "800"],
+  variable: "--font-nunito",
+});
+
 export const metadata = {
   title: "varsha and pradeep architects | Modern Architecture & Design",
   description: "Premium architectural design services for residential and commercial projects.",
@@ -54,7 +60,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${lato.variable} ${playfair.variable} ${cormorant.variable} ${inter.variable} ${poppins.variable} ${dmSans.variable}`}>
+      <body className={`${lato.variable} ${playfair.variable} ${cormorant.variable} ${inter.variable} ${poppins.variable} ${dmSans.variable} ${nunito.variable}`}>
         <ScrollReveal />
         <CustomCursor />
         <Navbar />

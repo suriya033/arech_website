@@ -13,7 +13,6 @@ export default function AdminSidebar() {
     const navItems = [
         { name: "Dashboard", path: "/admin/dashboard", icon: "📊" },
         { name: "Projects", path: "/admin/projects", icon: "🏗️" },
-        { name: "Services", path: "/admin/services", icon: "⚙️" },
         { name: "Team", path: "/admin/team", icon: "👥" },
         { name: "Testimonials", path: "/admin/testimonials", icon: "💬" },
         { name: "Careers", path: "/admin/careers", icon: "💼" },
@@ -39,7 +38,7 @@ export default function AdminSidebar() {
                     </button>
                 </div>
 
-               
+
             </div>
 
             {/* Sidebar Overlay */}

@@ -2,6 +2,8 @@ import dbConnect from "@/lib/db";
 import TeamMember from "@/models/TeamMember";
 import { NextResponse } from "next/server";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
     try {
         await dbConnect();

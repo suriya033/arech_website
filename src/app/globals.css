@@ -2,16 +2,21 @@
 
 :root {
   /* Colors - Premium Architectural Palette */
+  --burgundy: #650A0B;
+  --deep-red: #9A0101;
+  --silver: #A9A6A6;
+  --charcoal: #5B595B;
+  --black-soft: #1F1515;
+
   --background: #ffffff;
-  --foreground: #0f172a;
-  --primary: #0f172a;
-  --primary-light: #1e293b;
-  --accent: #c5a059;
-  /* Sophisticated Gold */
-  --accent-light: #dfc08d;
+  --foreground: var(--black-soft);
+  --primary: var(--burgundy);
+  --primary-light: var(--deep-red);
+  --accent: var(--silver);
+  --accent-light: var(--charcoal);
   --secondary: #f8fafc;
   --border: #e2e8f0;
-  --text-muted: #64748b;
+  --text-muted: var(--charcoal);
   --success: #10b981;
   --error: #ef4444;
 
@@ -46,15 +51,15 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #020617;
+    --background: #0a0a0a;
     --foreground: #f8fafc;
-    --primary: #f8fafc;
-    --primary-light: #e2e8f0;
-    --accent: #d4af37;
-    --secondary: #0f172a;
-    --border: #1e293b;
-    --text-muted: #94a3b8;
-    --glass-bg: rgba(15, 23, 42, 0.7);
+    --primary: var(--deep-red);
+    --primary-light: var(--burgundy);
+    --accent: var(--silver);
+    --secondary: #1a1a1a;
+    --border: #333333;
+    --text-muted: var(--silver);
+    --glass-bg: rgba(31, 21, 21, 0.7);
     --glass-border: rgba(255, 255, 255, 0.1);
   }
 }
@@ -276,6 +281,21 @@ img,
   will-change: transform, opacity;
 }
 
+.reveal-blur {
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(30px);
+  transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1), transform 1.2s cubic-bezier(0.22, 1, 0.36, 1), filter 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, opacity, filter;
+}
+
+.reveal-skew {
+  opacity: 0;
+  transform: translateY(50px) skewY(5deg);
+  transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1), transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, opacity;
+}
+
 h1.active,
 h2.active,
 h3.active,
@@ -287,9 +307,12 @@ img.active,
 .reveal-text.active,
 .reveal-left.active,
 .reveal-right.active,
-.scale-in.active {
+.scale-in.active,
+.reveal-blur.active,
+.reveal-skew.active {
   opacity: 1;
-  transform: translateY(0) translateX(0) scale(1);
+  transform: translateY(0) translateX(0) scale(1) skewY(0);
+  filter: blur(0);
 }
 
 
