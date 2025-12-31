@@ -1,8 +1,8 @@
 .cursor {
     width: 8px;
     height: 8px;
-    background-color: var(--accent);
-    border-radius: 50%;
+    background-color: red;
+    border-radius: 10%;
     position: fixed;
     top: 0;
     left: 0;
@@ -17,7 +17,7 @@
     width: 40px;
     height: 40px;
     border: 1px solid var(--accent);
-    border-radius: 50%;
+    border-radius: 30%;
     position: fixed;
     top: 0;
     left: 0;

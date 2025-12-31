@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
@@ -15,11 +16,8 @@ export default function Navbar() {
     useEffect(() => {
         const handleScroll = () => {
             const currentScrollY = window.scrollY;
-
-            // Scrolled state for background change
             setScrolled(currentScrollY > 50);
 
-            // Progress bar calculation
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             const scrolled = (winScroll / height) * 100;
@@ -38,7 +36,6 @@ export default function Navbar() {
             const rect = cta.getBoundingClientRect();
             const x = e.clientX - rect.left - rect.width / 2;
             const y = e.clientY - rect.top - rect.height / 2;
-
             cta.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
         };
 
@@ -65,7 +62,20 @@ export default function Navbar() {
             />
             <div className={`container ${styles.nav}`}>
                 <Link href="/" className={styles.logo}>
-                    varsha and pradeep architects
+                    <div className={styles.logoImageWrapper}>
+                        <Image
+                            src="/logo.png"
+                            alt="VP Architects Logo"
+                            width={65}
+                            height={65}
+                            className={styles.logoImage}
+                            priority
+                        />
+                    </div>
+                    <div className={styles.logoText}>
+                        <span className={styles.brandName}>Varsha & Pradeep</span>
+                        <span className={styles.brandSub}>Architects</span>
+                    </div>
                 </Link>
 
                 <nav>

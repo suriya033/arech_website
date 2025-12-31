@@ -7,6 +7,7 @@ import styles from "./TeamList.module.css";
 export default function TeamListClient() {
     const [members, setMembers] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [selectedMember, setSelectedMember] = useState(null);
 
     useEffect(() => {
         fetchMembers();
@@ -39,6 +40,16 @@ export default function TeamListClient() {
         }
     };
 
+    const handleViewMember = (member) => {
+        setSelectedMember(member);
+        document.body.style.overflow = 'hidden';
+    };
+
+    const closeModal = () => {
+        setSelectedMember(null);
+        document.body.style.overflow = 'unset';
+    };
+
     if (loading) {
         return (
             <div className={styles.loadingContainer}>
@@ -67,7 +78,7 @@ export default function TeamListClient() {
                         className={`${styles.memberCard} reveal`}
                         style={{ transitionDelay: `${index * 0.1}s` }}
                     >
-                        <div className={styles.cardLink}>
+                        <div className={styles.cardContent}>
                             <div className={styles.imageContainer}>
                                 <Image
                                     src={member.image || "https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=1000&auto=format&fit=crop"}
@@ -77,6 +88,14 @@ export default function TeamListClient() {
                                     style={{ objectFit: 'cover' }}
                                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                 />
+                                <div className={styles.imageOverlay}>
+                                    <button
+                                        className={styles.viewProfileBtn}
+                                        onClick={() => handleViewMember(member)}
+                                    >
+                                        View Profile
+                                    </button>
+                                </div>
                             </div>
 
                             <div className={styles.memberInfo}>
@@ -88,6 +107,78 @@ export default function TeamListClient() {
                 ))}
             </div>
 
+            {/* Member Detail Modal */}
+            {selectedMember && (
+                <div className={styles.modalOverlay} onClick={closeModal}>
+                    <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+                        <button className={styles.closeBtn} onClick={closeModal}>×</button>
+
+                        <div className={styles.modalGrid}>
+                            <div className={styles.modalImageContainer}>
+                                <Image
+                                    src={selectedMember.image || "https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=1000&auto=format&fit=crop"}
+                                    alt={selectedMember.name}
+                                    fill
+                                    className={styles.modalImage}
+                                    style={{ objectFit: 'cover' }}
+                                />
+                            </div>
+
+                            <div className={styles.modalInfo}>
+                                <span className={styles.modalRole}>{selectedMember.role}</span>
+                                <h2 className={styles.modalName}>{selectedMember.name}</h2>
+
+                                <div className={styles.modalDivider}></div>
+
+                                <div className={styles.modalBio}>
+                                    <h3>About</h3>
+                                    {selectedMember.description ? (
+                                        selectedMember.description.split('\n').map((paragraph, index) => (
+                                            <p key={index}>{paragraph}</p>
+                                        ))
+                                    ) : (
+                                        <p>No biography available.</p>
+                                    )}
+                                </div>
+
+                                {selectedMember.expertise && (
+                                    <div className={styles.modalExpertise}>
+                                        <h3>Expertise</h3>
+                                        <div className={styles.expertiseTags}>
+                                            {Array.isArray(selectedMember.expertise)
+                                                ? selectedMember.expertise.map((skill, i) => (
+                                                    <span key={i} className={styles.tag}>{skill}</span>
+                                                ))
+                                                : selectedMember.expertise.split(',').map((skill, i) => (
+                                                    <span key={i} className={styles.tag}>{skill.trim()}</span>
+                                                ))
+                                            }
+                                        </div>
+                                    </div>
+                                )}
+
+                                <div className={styles.modalContact}>
+                                    {selectedMember.email && (
+                                        <a href={`mailto:${selectedMember.email}`} className={styles.contactLink}>
+                                            ✉ {selectedMember.email}
+                                        </a>
+                                    )}
+                                    {selectedMember.phone && (
+                                        <a href={`tel:${selectedMember.phone}`} className={styles.contactLink}>
+                                            📞 {selectedMember.phone}
+                                        </a>
+                                    )}
+                                    {selectedMember.linkedin && (
+                                        <a href={selectedMember.linkedin} target="_blank" rel="noopener noreferrer" className={styles.contactLink}>
+                                            in LinkedIn Profile
+                                        </a>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

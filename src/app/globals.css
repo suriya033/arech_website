@@ -2,11 +2,11 @@
 
 :root {
   /* Colors - Premium Architectural Palette */
-  --burgundy: #650A0B;
-  --deep-red: #9A0101;
-  --silver: #A9A6A6;
-  --charcoal: #5B595B;
-  --black-soft: #1F1515;
+  --burgundy: #0F172A;
+  --deep-red: #020617;
+  --silver: #FFFFFF;
+  --charcoal: #94A3B8;
+  --black-soft: #0B0B0B;
 
   --background: #ffffff;
   --foreground: var(--black-soft);
@@ -15,7 +15,7 @@
   --accent: var(--silver);
   --accent-light: var(--charcoal);
   --secondary: #f8fafc;
-  --border: #e2e8f0;
+  --border: #C9A24D;
   --text-muted: var(--charcoal);
   --success: #10b981;
   --error: #ef4444;
@@ -105,7 +105,7 @@ h6 {
 
 h1 {
   font-family: var(--font-inter), sans-serif;
-  font-size: clamp(3.5rem, 8vw, 4rem);
+  font-size: clamp(2.5rem, 8vw, 4rem);
 }
 
 h2 {
@@ -204,7 +204,7 @@ p {
 }
 
 .btn:hover {
-  color: white;
+  color: black;
   border-color: var(--accent);
   transform: translateY(-3px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
@@ -219,8 +219,8 @@ p {
   align-items: center;
   justify-content: center;
   padding: 1rem 2.5rem;
-  background-color: transparent;
-  color: var(--primary);
+  background-color:white;
+  color: black;
   border: 2px solid var(--primary);
   border-radius: var(--radius-full);
   font-weight: 600;
@@ -230,7 +230,7 @@ p {
 }
 
 .btn-outline:hover {
-  background-color: var(--primary);
+  background-color: black;
   color: var(--background);
   transform: translateY(-3px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
